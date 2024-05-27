@@ -9,24 +9,49 @@ part 'meal_state.dart';
 class MealBloc extends Bloc<MealEvent, MealState> {
   final MealRepository mealRepository;
 
-  MealBloc({required this.mealRepository}) : super(MealInitial());
-
-  @override
-  Stream<MealState> mapEventToState(MealEvent event) async* {
-    if (event is LoadMeals) {
-      yield MealLoading();
+  MealBloc({required this.mealRepository}) : super(MealInitial()) {
+    on<LoadMeals>((event, emit) async {
+      emit(MealLoading());
       try {
         final meals = await mealRepository.fetchMeals();
-        yield MealLoaded(meals: meals);
+        print(meals);
+        emit(MealLoaded(meals: meals));
       } catch (e) {
-        yield MealError(message: e.toString());
+        print("in the meal_bloc");
+        print(e.toString());
+        emit(MealError(message: e.toString()));
       }
-    } else if (event is AddMeal) {
-      // Handle AddMeal event
-    } else if (event is UpdateMeal) {
-      // Handle UpdateMeal event
-    } else if (event is DeleteMeal) {
-      // Handle DeleteMeal event
-    }
+    });
   }
 }
+
+
+
+
+
+
+
+
+
+
+  // MealBloc({required this.mealRepository}) : super(MealInitial());
+
+  // @override
+  // Stream<MealState> mapEventToState(MealEvent event) async* {
+  //   if (event is LoadMeals) {
+  //     yield MealLoading();
+  //     try {
+  //       final meals = await mealRepository.fetchMeals();
+  //       yield MealLoaded(meals: meals);
+  //     } catch (e) {
+  //       yield MealError(message: e.toString());
+  //     }
+  //   } else if (event is AddMeal) {
+  //     // Handle AddMeal event
+  //   } else if (event is UpdateMeal) {
+  //     // Handle UpdateMeal event
+  //   } else if (event is DeleteMeal) {
+  //     // Handle DeleteMeal event
+  //   }
+  // }
+

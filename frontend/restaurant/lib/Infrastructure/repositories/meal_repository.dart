@@ -8,11 +8,15 @@ class MealRepository {
   MealRepository({required this.baseUrl});
 
   Future<List<Meal>> fetchMeals() async {
-    final response = await http.get(Uri.parse('$baseUrl/meals'));
-
+    final response =
+        await http.get(Uri.parse('$baseUrl/meals'), headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      "authorization": "Bearer ", // I deleted the token for security reasons
+    });
+    print(json.decode(response.body));
     if (response.statusCode == 200) {
       List<dynamic> body = json.decode(response.body);
-
+      print(body);
       return body.map((dynamic item) => Meal.fromJson(item)).toList();
     } else {
       throw Exception('Failed to load meals');

@@ -34,17 +34,17 @@ class MyApp extends StatelessWidget {
             authRepository: authRepository,
           ),
         ),
-        // BlocProvider(
-        //   create: (context) =>
-        //       MealBloc(mealRepository: mealRepository)..add(LoadMeals()),
-        // ),
+        BlocProvider(
+          create: (context) =>
+              MealBloc(mealRepository: mealRepository)..add(LoadMeals()),
+        ),
       ],
       child: MaterialApp(
         title: 'Meal Ordering App',
         initialRoute: '/',
         routes: {
-          '/': (context) => LoginScreen(),
-          '/home': (context) => MealsScreen(),
+          // '/': (context) => LoginScreen(),
+          '/': (context) => MealsScreen(),
         },
       ),
     );
