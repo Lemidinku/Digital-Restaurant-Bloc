@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant/presentation/bottom_nav.dart';
-import 'package:restaurant/presentation/welcome-screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'application/auth/auth_bloc.dart';
 import 'application/meal/meal_bloc.dart';
 import './Infrastructure/repositories/auth_repository.dart';
 import './Infrastructure/repositories/meal_repository.dart';
+import './login_screen.dart';
+import '/meals_screen.dart';
 
 void main() {
   final AuthRepository authRepository =
@@ -25,18 +25,28 @@ class MyApp extends StatelessWidget {
 
   MyApp({required this.authRepository, required this.mealRepository});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color.fromRGBO(239, 108, 0, 1)),
-        useMaterial3: true,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => AuthBloc(
+            authRepository: authRepository,
+          ),
+        ),
+        // BlocProvider(
+        //   create: (context) =>
+        //       MealBloc(mealRepository: mealRepository)..add(LoadMeals()),
+        // ),
+      ],
+      child: MaterialApp(
+        title: 'Meal Ordering App',
+        initialRoute: '/',
+        routes: {
+          '/': (context) => LoginScreen(),
+          '/home': (context) => MealsScreen(),
+        },
       ),
-      home: WelcomePage(),
-      routes: {'/entry': (context) => BottomNav()},
     );
   }
 }
