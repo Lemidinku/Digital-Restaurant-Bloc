@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpStatus, HttpException} from '@nestjs/common';
 import { SignupAuthDto } from './dto/signup.auth.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from 'src/schemas/User.schema';
@@ -17,6 +17,7 @@ export class AuthService {
 
   async signUp(signUpDto: SignupAuthDto): Promise<object> {
     // const { username, phone, password } = signUpDto;
+    console.log("user registration")
     const hashedPassword = await bcrypt.hash(signUpDto.password, 10);
 
     signUpDto.password = hashedPassword;
@@ -60,8 +61,10 @@ export class AuthService {
         phone: user.phone,
         roles: user.roles,
       });
-      return { success: true, roles:user.roles, token: token };
-    } catch (error) {
+      const returned_user = { id: user.id,username: user.username, phone: user.phone, role:user.roles[0], token: token }
+      return { success: true, message: 'User logged in successfully', user: returned_user};
+    } 
+    catch (error) {
       throw new Error(`Error finding user with id: ${error.message}`);
     }
   }
