@@ -28,15 +28,28 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color.fromRGBO(239, 108, 0, 1)),
-        useMaterial3: true,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => AuthBloc(
+            authRepository: authRepository,
+          ),
+        ),
+        BlocProvider(
+          create: (context) =>
+              MealBloc(mealRepository: mealRepository)..add(LoadMeals()),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(
+              seedColor: const Color.fromRGBO(239, 108, 0, 1)),
+          useMaterial3: true,
+        ),
+        home: BottomNav(),
+        routes: {'/entry': (context) => BottomNav()},
       ),
-      home: WelcomePage(),
-      routes: {'/entry': (context) => BottomNav()},
     );
   }
 }
