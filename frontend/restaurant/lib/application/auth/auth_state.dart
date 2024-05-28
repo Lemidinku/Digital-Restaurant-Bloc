@@ -20,6 +20,8 @@ class AuthAuthenticated extends AuthState {
   List<Object> get props => [user];
 }
 
+class AuthUnauthenticated extends AuthState {} // when the user logs out
+
 class AuthError extends AuthState {
   final String message;
 
@@ -28,3 +30,5 @@ class AuthError extends AuthState {
   @override
   List<Object> get props => [message];
 }
+
+class AuthRegistered extends AuthState {}
