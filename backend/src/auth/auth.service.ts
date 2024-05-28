@@ -61,8 +61,8 @@ export class AuthService {
         phone: user.phone,
         roles: user.roles,
       });
-      const returned_user = { id: user.id,username: user.username, phone: user.phone, role:user.roles[0], token: token }
-      return { success: true, message: 'User logged in successfully', user: returned_user};
+      const returned_user = { id: user.id,username: user.username, phone: user.phone, role:user.roles[0] }
+      return { success: true, message: 'User logged in successfully', user: returned_user, token: token};
     } 
     catch (error) {
       throw new Error(`Error finding user with id: ${error.message}`);
