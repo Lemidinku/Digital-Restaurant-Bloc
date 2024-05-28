@@ -1,17 +1,20 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../../domain/meal.dart';
+import "../../storage.dart";
 
 class MealRepository {
   final String baseUrl;
+  final SecureStorage _secureStorage = SecureStorage.instance;
 
   MealRepository({required this.baseUrl});
 
   Future<List<Meal>> fetchMeals() async {
+    String? token = await _secureStorage.read('token');
     final response =
         await http.get(Uri.parse('$baseUrl/meals'), headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
-      "authorization": "Bearer ", // I deleted the token for security reasons
+      "authorization": "Bearer $token",
     });
     print(json.decode(response.body));
     if (response.statusCode == 200) {

@@ -43,8 +43,8 @@ class MyApp extends StatelessWidget {
         title: 'Meal Ordering App',
         initialRoute: '/',
         routes: {
-          // '/': (context) => LoginScreen(),
-          '/': (context) => MealsScreen(),
+          '/': (context) => LoginScreen(),
+          '/home': (context) => MealsScreen(),
         },
       ),
     );

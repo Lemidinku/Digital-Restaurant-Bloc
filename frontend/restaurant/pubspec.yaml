@@ -43,6 +43,7 @@ dependencies:
   flutter_bloc: ^8.1.5
   json_annotation: ^4.9.0
   get: ^4.6.6
+  flutter_secure_storage: ^4.2.1
 
 
 dev_dependencies:
