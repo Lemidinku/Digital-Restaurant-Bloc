@@ -25,6 +25,63 @@ class MealRepository {
       throw Exception('Failed to load meals');
     }
   }
+
+  Future<Meal> addMeal(String name, String description, String price) async {
+    String? token = await _secureStorage.read('token');
+    final response = await http.post(
+      Uri.parse('$baseUrl/meals'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        "authorization": "Bearer $token",
+      },
+      body: jsonEncode(<String, String>{
+        'name': name,
+        'description': description,
+        'price': price,
+      }),
+    );
+    if (response.statusCode == 200) {
+      return Meal.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed to add meal');
+    }
+  }
+
+  Future<Meal> updateMeal(
+      String id, String name, String description, String price) async {
+    String? token = await _secureStorage.read('token');
+    final response = await http.put(
+      Uri.parse('$baseUrl/meals/$id'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        "authorization": "Bearer $token",
+      },
+      body: jsonEncode(<String, String>{
+        'name': name,
+        'description': description,
+        'price': price,
+      }),
+    );
+    if (response.statusCode == 200) {
+      return Meal.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed to update meal');
+    }
+  }
+
+  Future<void> deleteMeal(String id) async {
+    String? token = await _secureStorage.read('token');
+    final response = await http.delete(
+      Uri.parse('$baseUrl/meals/$id'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        "authorization": "Bearer $token",
+      },
+    );
+    if (response.statusCode != 200) {
+      throw Exception('Failed to delete meal');
+    }
+  }
 }
 
 // meal repository test

@@ -7,6 +7,8 @@ abstract class MealState extends Equatable {
   List<Object> get props => [];
 }
 
+abstract class mealActionState extends MealState {}
+
 class MealInitial extends MealState {}
 
 class MealLoading extends MealState {}
@@ -27,4 +29,14 @@ class MealError extends MealState {
 
   @override
   List<Object> get props => [message];
+}
+
+class MealSelectedButtonActionState extends mealActionState {}
+
+class mealselectedOrderButtonActionState extends mealActionState {}
+
+class CartItems extends MealState {
+  final List<Meal> orderedItems;
+
+  CartItems({required this.orderedItems});
 }
