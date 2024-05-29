@@ -55,7 +55,9 @@ class MyApp extends StatelessWidget {
         home: BottomNav(),
         routes: {
           '/entry': (context) => BottomNav(),
-          '/selected': (context) => SelectedOrderPage()
+          '/selected': (context) => SelectedOrderPage(),
+          '/login': (context) => LoginPage(),
+          '/signup': (context) => SignupPage()
         },
       ),
     );

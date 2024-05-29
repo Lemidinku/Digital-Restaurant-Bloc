@@ -70,7 +70,7 @@ class SignupPage extends StatelessWidget {
                     height: 40,
                     child: TextButton(
                       onPressed: () {
-                        // showRegisterForm(context);
+                        Navigator.pushNamed(context, '/login');
                       },
                       child: Text(
                         'Already Have An Account? Login Here',

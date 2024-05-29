@@ -3,11 +3,29 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../application/auth/auth_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class RegistrationForm extends StatelessWidget {
+class RegistrationForm extends StatefulWidget {
   RegistrationForm({super.key});
+
+  @override
+  State<RegistrationForm> createState() => _RegistrationFormState();
+}
+
+class _RegistrationFormState extends State<RegistrationForm> {
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController usernameController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
+
   final TextEditingController phoneController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controllers when the widget is disposed.
+    usernameController.dispose();
+    passwordController.dispose();
+    phoneController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,12 +118,15 @@ class RegistrationForm extends StatelessWidget {
             const SizedBox(height: 30.0),
             ElevatedButton(
               onPressed: () {
-                BlocProvider.of<AuthBloc>(context).add(AuthSignUp(
-                  username: usernameController.text,
-                  password: passwordController.text,
-                  phone: phoneController.text,
-                ));
-                print(usernameController.text + ' ' + passwordController.text);
+                if (_formKey.currentState!.validate()) {
+                  print(
+                      usernameController.text + ' ' + passwordController.text);
+                  BlocProvider.of<AuthBloc>(context).add(AuthSignUp(
+                    username: usernameController.text,
+                    password: passwordController.text,
+                    phone: phoneController.text,
+                  ));
+                }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFFF97300), // Background color

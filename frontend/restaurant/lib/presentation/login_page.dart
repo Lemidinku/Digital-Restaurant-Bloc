@@ -70,7 +70,7 @@ class LoginPage extends StatelessWidget {
                     height: 40,
                     child: TextButton(
                       onPressed: () {
-                        // showRegisterForm(context);
+                        Navigator.pushNamed(context, '/signup');
                       },
                       child: Text(
                         'Sign Up',

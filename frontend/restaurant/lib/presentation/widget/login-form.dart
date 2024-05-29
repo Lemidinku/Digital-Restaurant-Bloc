@@ -3,10 +3,27 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../application/auth/auth_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoginForm extends StatelessWidget {
+class LoginForm extends StatefulWidget {
   LoginForm({super.key});
+
+  @override
+  State<LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController usernameController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controllers when the widget is disposed.
+    usernameController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
@@ -32,9 +49,15 @@ class LoginForm extends StatelessWidget {
               style:
                   GoogleFonts.lato(fontSize: 16.0, fontWeight: FontWeight.bold),
             ),
-            TextField(
+            TextFormField(
               keyboardType: TextInputType.text,
               controller: usernameController,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your username';
+                }
+                return null;
+              },
               decoration: InputDecoration(
                 hintText: 'Enter your username',
                 border: OutlineInputBorder(
@@ -55,9 +78,15 @@ class LoginForm extends StatelessWidget {
               style:
                   GoogleFonts.lato(fontSize: 16.0, fontWeight: FontWeight.bold),
             ),
-            TextField(
+            TextFormField(
               obscureText: true,
               controller: passwordController,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your password';
+                }
+                return null;
+              },
               decoration: InputDecoration(
                 hintText: 'Enter your password',
                 border: OutlineInputBorder(
@@ -75,11 +104,14 @@ class LoginForm extends StatelessWidget {
             const SizedBox(height: 30.0),
             ElevatedButton(
               onPressed: () {
-                BlocProvider.of<AuthBloc>(context).add(AuthLogin(
-                  username: usernameController.text,
-                  password: passwordController.text,
-                ));
-                print(usernameController.text + ' ' + passwordController.text);
+                if (_formKey.currentState!.validate()) {
+                  BlocProvider.of<AuthBloc>(context).add(AuthLogin(
+                    username: usernameController.text,
+                    password: passwordController.text,
+                  ));
+                  print(
+                      usernameController.text + ' ' + passwordController.text);
+                }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFFF97300), // Background color
