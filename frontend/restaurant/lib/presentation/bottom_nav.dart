@@ -28,6 +28,16 @@ class _BottomNavState extends State<BottomNav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Digital Restaurant'),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.person),
+          ),
+        ],
+      ),
       body: _pages[selected_idx],
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: const Color(0xFFF97350),
