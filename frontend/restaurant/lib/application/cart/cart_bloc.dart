@@ -15,13 +15,15 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   }
 
   FutureOr<void> cartInitalEvent(
-      CartInitalEvent event, Emitter<CartState> emit) {
-    emit(CartSuccessState(orderedItems: orderedItems));
+      CartInitalEvent event, Emitter<CartState> emit) async {
+    emit(CartLoaddingState());
+    await Future.delayed(Duration(seconds: 1));
+    emit(CartSuccessState(orders: orderedItems));
   }
 
   FutureOr<void> cartRemoveEvent(
       CartRemoveEvent event, Emitter<CartState> emit) {
     orderedItems.remove(event.removedMeals);
-    emit(CartSuccessState(orderedItems: orderedItems));
+    emit(CartSuccessState(orders: orderedItems));
   }
 }

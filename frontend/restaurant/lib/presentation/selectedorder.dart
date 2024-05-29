@@ -13,11 +13,10 @@ class SelectedOrderPage extends StatefulWidget {
 class _SelectedOrderPageState extends State<SelectedOrderPage> {
   @override
   void initState() {
-    cartBloc.add(CartInitalEvent());
+    context.read<CartBloc>().add(CartInitalEvent());
     super.initState();
   }
 
-  final CartBloc cartBloc = CartBloc();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +24,7 @@ class _SelectedOrderPageState extends State<SelectedOrderPage> {
         title: Text('Selected Orders'),
         backgroundColor: Colors.deepOrange,
       ),
-      body: BlocConsumer<MealBloc, MealState>(
+      body: BlocConsumer<CartBloc, CartState>(
         listener: (context, state) {
           // TODO: implement listener
         },
@@ -33,12 +32,16 @@ class _SelectedOrderPageState extends State<SelectedOrderPage> {
         buildWhen: (previous, current) => current is! CartActionState,
         builder: (context, state) {
           switch (state.runtimeType) {
+            case CartLoaddingState:
+              return Center(
+                child: CircularProgressIndicator(),
+              );
             case CartSuccessState:
               final successState = state as CartSuccessState;
               return ListView.builder(
-                itemCount: successState.orderedItems.length,
+                itemCount: successState.orders.length,
                 itemBuilder: (context, index) {
-                  final foodItem = successState.orderedItems[index];
+                  final foodItem = successState.orders[index];
                   return Card(
                     margin: EdgeInsets.all(8.0),
                     child: ListTile(
@@ -60,7 +63,9 @@ class _SelectedOrderPageState extends State<SelectedOrderPage> {
                       trailing: IconButton(
                         icon: Icon(Icons.clear),
                         onPressed: () {
-                          cartBloc.add(CartRemoveEvent(removedMeals: foodItem));
+                          context
+                              .read<CartBloc>()
+                              .add(CartRemoveEvent(removedMeals: foodItem));
                         },
                       ),
                     ),

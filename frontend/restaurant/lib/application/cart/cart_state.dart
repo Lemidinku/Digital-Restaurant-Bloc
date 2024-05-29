@@ -8,9 +8,11 @@ abstract class CartActionState extends CartState {}
 
 final class CartInitial extends CartState {}
 
+class CartLoaddingState extends CartState {}
+
 class CartSuccessState extends CartState {
-  final List<Meal> orderedItems;
+  final List<Meal> orders;
   CartSuccessState({
-    required this.orderedItems,
+    required this.orders,
   });
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant/application/cart/cart_bloc.dart';
 import 'package:restaurant/presentation/bottom_nav.dart';
+import 'package:restaurant/presentation/signup_page.dart';
 import 'package:restaurant/presentation/welcome-screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'application/auth/auth_bloc.dart';
@@ -40,6 +42,7 @@ class MyApp extends StatelessWidget {
           create: (context) =>
               MealBloc(mealRepository: mealRepository)..add(LoadMeals()),
         ),
+        BlocProvider(create: (context) => CartBloc()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
