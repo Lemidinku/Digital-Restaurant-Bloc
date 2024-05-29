@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:restaurant/Infrastructure/repositories/orderedItems.dart';
+import 'package:restaurant/application/meal/meal_bloc.dart';
 import 'package:restaurant/domain/meal.dart';
 
 part 'cart_event.dart';
