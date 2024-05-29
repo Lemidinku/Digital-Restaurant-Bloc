@@ -3,7 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'welcome-screen.dart';
 
 class LoginForm extends StatelessWidget {
-  const LoginForm({super.key});
+  LoginForm({super.key});
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -97,9 +99,10 @@ class LoginForm extends StatelessWidget {
                   GoogleFonts.lato(fontSize: 16.0, fontWeight: FontWeight.bold),
             ),
             TextField(
-              keyboardType: TextInputType.emailAddress,
+              keyboardType: TextInputType.text,
+              controller: usernameController,
               decoration: InputDecoration(
-                hintText: 'Enter your email',
+                hintText: 'Enter your username',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(
                       15.0), // Adjust the radius here for more or less curve
@@ -120,6 +123,7 @@ class LoginForm extends StatelessWidget {
             ),
             TextField(
               obscureText: true,
+              controller: passwordController,
               decoration: InputDecoration(
                 hintText: 'Enter your password',
                 border: OutlineInputBorder(
@@ -137,6 +141,8 @@ class LoginForm extends StatelessWidget {
             const SizedBox(height: 30.0),
             ElevatedButton(
               onPressed: () {
+                print(usernameController);
+                print(passwordController);
                 Navigator.pushNamed(context, '/entry');
                 // Add navigation or form submission logic here
               },
