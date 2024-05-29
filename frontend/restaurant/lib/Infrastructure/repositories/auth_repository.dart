@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'package:http/http.dart' as http;
 import '../../domain/user.dart';
 import '../../storage.dart';
@@ -25,7 +26,7 @@ class AuthRepository {
     }
   }
 
-  Future<User> signup(String username, String password, String phone) async {
+  Future<bool> signup(String username, String password, String phone) async {
     final response = await http.post(
       Uri.parse('$baseUrl/auth/signup'),
       headers: {'Content-Type': 'application/json'},
@@ -35,9 +36,13 @@ class AuthRepository {
 
     Map<String, dynamic> returned = json.decode(response.body);
     if (returned['success'] == true) {
-      return User.fromJson(returned['user']);
+      return true;
     } else {
       throw Exception('Failed to register');
     }
+  }
+
+  Future<void> logout() async {
+    await _secureStorage.delete('token');
   }
 }
