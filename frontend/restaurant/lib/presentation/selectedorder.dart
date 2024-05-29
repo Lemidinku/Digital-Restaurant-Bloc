@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant/Infrastructure/repositories/orderedItems.dart';
+import 'package:restaurant/application/cart/cart_bloc.dart';
 import 'package:restaurant/application/meal/meal_bloc.dart';
 import 'package:restaurant/domain/meal.dart';
 
@@ -12,10 +13,11 @@ class SelectedOrderPage extends StatefulWidget {
 class _SelectedOrderPageState extends State<SelectedOrderPage> {
   @override
   void initState() {
-    context.read<MealBloc>().add(CartInitalEvent());
+    cartBloc.add(CartInitalEvent());
     super.initState();
   }
 
+  final CartBloc cartBloc = CartBloc();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,12 +29,12 @@ class _SelectedOrderPageState extends State<SelectedOrderPage> {
         listener: (context, state) {
           // TODO: implement listener
         },
-        listenWhen: (previous, current) => current is mealActionState,
-        buildWhen: (previous, current) => current is! mealActionState,
+        listenWhen: (previous, current) => current is CartActionState,
+        buildWhen: (previous, current) => current is! CartActionState,
         builder: (context, state) {
           switch (state.runtimeType) {
-            case CartItems:
-              final successState = state as CartItems;
+            case CartSuccessState:
+              final successState = state as CartSuccessState;
               return ListView.builder(
                 itemCount: successState.orderedItems.length,
                 itemBuilder: (context, index) {
@@ -58,9 +60,7 @@ class _SelectedOrderPageState extends State<SelectedOrderPage> {
                       trailing: IconButton(
                         icon: Icon(Icons.clear),
                         onPressed: () {
-                          context
-                              .read<MealBloc>()
-                              .add(CartRemoveEvent(removedMeals: foodItem));
+                          cartBloc.add(CartRemoveEvent(removedMeals: foodItem));
                         },
                       ),
                     ),
