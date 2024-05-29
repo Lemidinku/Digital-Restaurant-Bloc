@@ -6,6 +6,7 @@ import 'application/auth/auth_bloc.dart';
 import 'application/meal/meal_bloc.dart';
 import './Infrastructure/repositories/auth_repository.dart';
 import './Infrastructure/repositories/meal_repository.dart';
+import './presentation/selectedorder.dart';
 
 void main() {
   final AuthRepository authRepository =
@@ -48,7 +49,10 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         home: BottomNav(),
-        routes: {'/entry': (context) => BottomNav()},
+        routes: {
+          '/entry': (context) => BottomNav(),
+          '/selected': (context) => SelectedOrderPage()
+        },
       ),
     );
   }

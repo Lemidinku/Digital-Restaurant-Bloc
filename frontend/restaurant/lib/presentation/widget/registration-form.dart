@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'welcome-screen.dart';
+import '../welcome-screen.dart';
 
 class RegistrationForm extends StatelessWidget {
   const RegistrationForm({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'registration-form.dart';
-import 'login-form.dart';
+import 'widget/registration-form.dart';
+import 'widget/login-form.dart';
 
 void main() {
   runApp(const MyApp());

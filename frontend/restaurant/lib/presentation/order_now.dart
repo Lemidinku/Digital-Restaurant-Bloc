@@ -3,10 +3,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant/application/meal/meal_bloc.dart';
 import 'package:restaurant/presentation/detail.dart';
-import 'package:restaurant/presentation/rating_stars.dart';
+import 'package:restaurant/presentation/widget/rating_stars.dart';
 import 'package:restaurant/presentation/selectedorder.dart';
 import 'package:restaurant/presentation/widget/order_col_widget.dart';
-import 'plus_minus_input.dart';
+import 'widget/plus_minus_input.dart';
 
 class OrderNowPage extends StatefulWidget {
   const OrderNowPage({super.key});
@@ -95,7 +95,12 @@ class _ResturantOrderPage extends State<OrderNowPage> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 16.0, vertical: 0),
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return SelectedOrderPage();
+                            }));
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
                             elevation: 3,

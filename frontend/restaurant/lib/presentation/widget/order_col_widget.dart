@@ -5,8 +5,8 @@ import 'package:restaurant/application/meal/meal_bloc.dart';
 import 'package:restaurant/domain/meal.dart';
 
 import 'package:restaurant/presentation/detail.dart';
-import 'package:restaurant/presentation/plus_minus_input.dart';
-import 'package:restaurant/presentation/rating_stars.dart';
+import 'package:restaurant/presentation/widget/plus_minus_input.dart';
+import 'package:restaurant/presentation/widget/rating_stars.dart';
 
 class OrderTail extends StatelessWidget {
   final Meal orders;
