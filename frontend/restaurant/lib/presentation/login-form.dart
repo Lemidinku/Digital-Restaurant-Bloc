@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'welcome-screen.dart';
+import '../application/auth/auth_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginForm extends StatelessWidget {
   LoginForm({super.key});
@@ -8,93 +9,26 @@ class LoginForm extends StatelessWidget {
   final TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state is AuthAuthenticated) {
+          print("Login successful");
+          Navigator.pushReplacementNamed(context, '/entry');
+        } else if (state is AuthError) {
+          print("login not successful");
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text("Login failed")));
+        }
+      },
       child: Container(
         padding: const EdgeInsets.all(20.0),
         color: Colors.white,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Center(
-              child: SizedBox(
-                width: 50,
-                child: Divider(
-                  thickness: 8,
-                  color: Colors.grey[300],
-                  height: 10,
-                ),
-              ),
-            ),
-            const SizedBox(height: 30.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    showRegisterForm(context);
-                  },
-                  style: TextButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: Colors.white, // Text color
-                    elevation: 0, // Adding elevation like an ElevatedButton
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4.0),
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Create Acoount',
-                        style: GoogleFonts.lato(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    showLoginForm(context);
-                  },
-                  style: TextButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: Colors.white, // Text color
-                    elevation: 0, // Adding elevation like an ElevatedButton
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4.0),
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Login',
-                        style: GoogleFonts.lato(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                          color: const Color(0xFFF97300),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 30,
-                        height: 15,
-                        child: Divider(
-                          thickness: 2,
-                          color: Color(0xFFF97300),
-                          height: 1,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
             const SizedBox(height: 30.0),
             Text(
-              'Email',
+              'Username',
               style:
                   GoogleFonts.lato(fontSize: 16.0, fontWeight: FontWeight.bold),
             ),
@@ -141,10 +75,11 @@ class LoginForm extends StatelessWidget {
             const SizedBox(height: 30.0),
             ElevatedButton(
               onPressed: () {
-                print(usernameController);
-                print(passwordController);
-                Navigator.pushNamed(context, '/entry');
-                // Add navigation or form submission logic here
+                BlocProvider.of<AuthBloc>(context).add(AuthLogin(
+                  username: usernameController.text,
+                  password: passwordController.text,
+                ));
+                print(usernameController.text + ' ' + passwordController.text);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFFF97300), // Background color
