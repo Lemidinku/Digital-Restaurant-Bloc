@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant/application/meal/meal_bloc.dart';
 import 'package:restaurant/domain/meal.dart';
 
@@ -97,7 +98,13 @@ class OrderTail extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      // MealBloc.add(
+                      //     OrderSelectedButtonEvent(clickedMeals: orders));
+                      context
+                          .read<MealBloc>()
+                          .add(OrderSelectedButtonEvent(clickedMeals: orders));
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFFF97350),
                       foregroundColor: Colors.white,
