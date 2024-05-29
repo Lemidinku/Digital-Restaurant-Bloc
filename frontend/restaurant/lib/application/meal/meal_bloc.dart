@@ -27,17 +27,31 @@ class MealBloc extends Bloc<MealEvent, MealState> {
     });
     on<OrderSelectedButtonEvent>(orderSelectedButtonEvent);
     on<OrderSelectedOrderButtonEvent>(orderSelectedOrderButtonEvent);
+    on<CartInitalEvent>(cartInitalEvent);
+    on<CartRemoveEvent>(cartRemoveEvent);
   }
 
   FutureOr<void> orderSelectedButtonEvent(
       OrderSelectedButtonEvent event, Emitter<MealState> emit) {
     print('item selected');
+    orderedItems.add(event.clickedMeals);
 
     emit(MealSelectedButtonActionState());
   }
 
   FutureOr<void> orderSelectedOrderButtonEvent(
       OrderSelectedOrderButtonEvent event, Emitter<MealState> emit) {}
+
+  FutureOr<void> cartInitalEvent(
+      CartInitalEvent event, Emitter<MealState> emit) {
+    emit(CartItems(orderedItems: orderedItems));
+  }
+
+  FutureOr<void> cartRemoveEvent(
+      CartRemoveEvent event, Emitter<MealState> emit) {
+    orderedItems.remove(event.removedMeals);
+    emit(CartItems(orderedItems: orderedItems));
+  }
 }
 
 
