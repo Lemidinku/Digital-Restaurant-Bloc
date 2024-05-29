@@ -1,104 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../welcome-screen.dart';
+import '../../application/auth/auth_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RegistrationForm extends StatelessWidget {
-  const RegistrationForm({super.key});
+  RegistrationForm({super.key});
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state is AuthRegistered) {
+          print("Registered successful");
+          Navigator.pushReplacementNamed(context, '/login');
+        } else if (state is AuthError) {
+          print("Registered not successful");
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text("Registration failed")));
+        }
+      },
       child: Container(
         padding: const EdgeInsets.all(20.0),
         color: Colors.white,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Center(
-              child: SizedBox(
-                width: 50,
-                child: Divider(
-                  thickness: 8,
-                  color: Colors.grey[300],
-                  height: 10,
-                ),
-              ),
-            ),
-            const SizedBox(height: 30.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    showRegisterForm(context);
-                  },
-                  style: TextButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: Colors.white, // Text color
-                    elevation: 0, // Adding elevation like an ElevatedButton
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4.0),
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Create Account',
-                        style: GoogleFonts.lato(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                          color: const Color(0xFFF97300),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 80,
-                        height: 15,
-                        child: Divider(
-                          thickness: 2,
-                          color: Color(0xFFF97300),
-                          height: 1,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    showLoginForm(context);
-                  },
-                  style: TextButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: Colors.white, // Text color
-                    elevation: 0, // Adding elevation like an ElevatedButton
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4.0),
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Login',
-                        style: GoogleFonts.lato(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
             const SizedBox(height: 30.0),
             Text(
-              'Full Name',
+              'Username',
               style:
                   GoogleFonts.lato(fontSize: 16.0, fontWeight: FontWeight.bold),
             ),
             TextField(
+              keyboardType: TextInputType.text,
+              controller: usernameController,
               decoration: InputDecoration(
-                hintText: 'Enter your full name',
+                hintText: 'Enter your username',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(
                       15.0), // Adjust the radius here for more or less curve
@@ -107,19 +47,21 @@ class RegistrationForm extends StatelessWidget {
                     width: 1.0, // Set border width
                   ),
                 ),
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                contentPadding: const EdgeInsets.symmetric(
+                    vertical: 10.0, horizontal: 20.0),
               ),
             ),
             const SizedBox(height: 20.0),
             Text(
-              'Email',
+              'phone number',
               style:
                   GoogleFonts.lato(fontSize: 16.0, fontWeight: FontWeight.bold),
             ),
             TextField(
+              keyboardType: TextInputType.phone,
+              controller: phoneController,
               decoration: InputDecoration(
-                hintText: 'Enter your email',
+                hintText: 'Enter your phone number',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(
                       15.0), // Adjust the radius here for more or less curve
@@ -128,8 +70,8 @@ class RegistrationForm extends StatelessWidget {
                     width: 1.0, // Set border width
                   ),
                 ),
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                contentPadding: const EdgeInsets.symmetric(
+                    vertical: 10.0, horizontal: 20.0),
               ),
             ),
             const SizedBox(height: 20.0),
@@ -140,6 +82,7 @@ class RegistrationForm extends StatelessWidget {
             ),
             TextField(
               obscureText: true,
+              controller: passwordController,
               decoration: InputDecoration(
                 hintText: 'Enter your password',
                 border: OutlineInputBorder(
@@ -157,15 +100,19 @@ class RegistrationForm extends StatelessWidget {
             const SizedBox(height: 30.0),
             ElevatedButton(
               onPressed: () {
-                // Add navigation or form submission logic here
-                Navigator.pushNamed(context, '/entry');
+                BlocProvider.of<AuthBloc>(context).add(AuthSignUp(
+                  username: usernameController.text,
+                  password: passwordController.text,
+                  phone: phoneController.text,
+                ));
+                print(usernameController.text + ' ' + passwordController.text);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFFF97300), // Background color
                 padding: const EdgeInsets.symmetric(vertical: 10.0),
               ),
               child: Text(
-                'Register',
+                'Create Account',
                 style: GoogleFonts.lato(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
