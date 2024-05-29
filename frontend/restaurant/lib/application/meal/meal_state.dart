@@ -35,8 +35,4 @@ class MealSelectedButtonActionState extends mealActionState {}
 
 class mealselectedOrderButtonActionState extends mealActionState {}
 
-class CartItems extends MealState {
-  final List<Meal> orderedItems;
-
-  CartItems({required this.orderedItems});
-}
+// 

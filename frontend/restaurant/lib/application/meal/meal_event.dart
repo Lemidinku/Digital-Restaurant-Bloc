@@ -37,15 +37,6 @@ class DeleteMeal extends MealEvent {
   List<Object> get props => [mealId];
 }
 
-class CartInitalEvent extends MealEvent {}
-
-class CartRemoveEvent extends MealEvent {
-  final Meal removedMeals;
-  CartRemoveEvent({
-    required this.removedMeals,
-  });
-}
-
 class OrderSelectedButtonEvent extends MealEvent {
   final Meal clickedMeals;
 
