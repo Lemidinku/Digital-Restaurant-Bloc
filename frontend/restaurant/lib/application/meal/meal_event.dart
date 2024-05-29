@@ -35,3 +35,11 @@ class DeleteMeal extends MealEvent {
   @override
   List<Object> get props => [mealId];
 }
+
+class OrderSelectedButtonEvent extends MealEvent {
+  final Meal clickedMeals;
+
+  OrderSelectedButtonEvent({required this.clickedMeals});
+}
+
+class OrderSelectedOrderButtonEvent extends MealEvent {}
