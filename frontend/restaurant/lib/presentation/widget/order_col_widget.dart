@@ -8,13 +8,34 @@ import 'package:restaurant/presentation/detail.dart';
 import 'package:restaurant/presentation/widget/plus_minus_input.dart';
 import 'package:restaurant/presentation/widget/rating_stars.dart';
 
-class OrderTail extends StatelessWidget {
+class OrderTail extends StatefulWidget {
   final Meal orders;
 
   const OrderTail({
     Key? key,
     required this.orders,
   }) : super(key: key);
+
+  @override
+  State<OrderTail> createState() => _OrderTailState();
+}
+
+class _OrderTailState extends State<OrderTail> {
+  int _quantity = 0;
+
+  void _increment() {
+    setState(() {
+      _quantity++;
+    });
+  }
+
+  void _decrement() {
+    setState(() {
+      if (_quantity > 0) {
+        _quantity--;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,12 +65,12 @@ class OrderTail extends StatelessWidget {
                           Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => FoodDetailPage(
                               imagePath: 'assets/Pizza.jpg',
-                              price: orders.price.toString(),
-                              origin: orders.origin,
+                              price: widget.orders.price.toString(),
+                              origin: widget.orders.origin,
                               rating: '3',
-                              type: orders.types[0],
-                              title: orders.name,
-                              kind: orders.allergy,
+                              type: widget.orders.types[0],
+                              title: widget.orders.name,
+                              kind: widget.orders.allergy,
                             ),
                           ));
                         },
@@ -73,7 +94,7 @@ class OrderTail extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      orders.name,
+                      widget.orders.name,
                       style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
@@ -81,7 +102,7 @@ class OrderTail extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      orders.price.toString(),
+                      widget.orders.price.toString(),
                       style: const TextStyle(
                         fontSize: 15,
                         color: Colors.black,
@@ -93,7 +114,11 @@ class OrderTail extends StatelessWidget {
                   rating: 3,
                   size: 15.0,
                 ),
-                const PlusMinusInput(),
+                PlusMinusInput(
+                  quantity: _quantity,
+                  increment: _increment,
+                  decrement: _decrement,
+                ),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0),
@@ -102,7 +127,7 @@ class OrderTail extends StatelessWidget {
                       // MealBloc.add(
                       //     OrderSelectedButtonEvent(clickedMeals: orders));
                       context.read<MealBloc>().add(OrderSelectedButtonEvent(
-                          clickedMeals: orders, quantity: 5));
+                          clickedMeals: widget.orders, quantity: _quantity));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFFF97350),

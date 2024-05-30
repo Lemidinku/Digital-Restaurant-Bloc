@@ -20,21 +20,22 @@ class AddMeal extends MealEvent {
 }
 
 class UpdateMeal extends MealEvent {
-  final Meal meal;
+  final String id;
+  final Map<String, dynamic> updates;
 
-  UpdateMeal({required this.meal});
+  UpdateMeal({required this.id, required this.updates});
 
   @override
-  List<Object> get props => [meal];
+  List<Object> get props => [id, updates];
 }
 
 class DeleteMeal extends MealEvent {
-  final int mealId;
+  final String id;
 
-  DeleteMeal({required this.mealId});
+  DeleteMeal({required this.id});
 
   @override
-  List<Object> get props => [mealId];
+  List<Object> get props => [id];
 }
 
 class OrderSelectedButtonEvent extends MealEvent {

@@ -25,6 +25,13 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   @override
+  void initState() {
+    print('login form init');
+    super.initState();
+    context.read<AuthBloc>().add(AuthCheck());
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
