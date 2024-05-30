@@ -53,3 +53,5 @@ class MealUpdated extends MealState {
   @override
   List<Object> get props => [meal];
 }
+
+class MealDeleted extends MealState {}

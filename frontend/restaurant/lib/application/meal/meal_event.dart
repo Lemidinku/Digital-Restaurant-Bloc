@@ -30,12 +30,12 @@ class UpdateMeal extends MealEvent {
 }
 
 class DeleteMeal extends MealEvent {
-  final int mealId;
+  final String id;
 
-  DeleteMeal({required this.mealId});
+  DeleteMeal({required this.id});
 
   @override
-  List<Object> get props => [mealId];
+  List<Object> get props => [id];
 }
 
 class OrderSelectedButtonEvent extends MealEvent {
