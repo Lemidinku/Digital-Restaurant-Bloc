@@ -26,7 +26,8 @@ class MealRepository {
     }
   }
 
-  Future<Meal> addMeal(String name, String description, String price) async {
+  Future<Meal> addMeal(Meal meal) async {
+    print('you are in the add meal in the meal repository');
     String? token = await _secureStorage.read('token');
     final response = await http.post(
       Uri.parse('$baseUrl/meals'),
@@ -34,12 +35,18 @@ class MealRepository {
         'Content-Type': 'application/json; charset=UTF-8',
         "authorization": "Bearer $token",
       },
-      body: jsonEncode(<String, String>{
-        'name': name,
-        'description': description,
-        'price': price,
+      body: jsonEncode(<String, dynamic>{
+        'name': meal.name,
+        'description': meal.description,
+        'price': meal.price,
+        'imageUrl': meal.imageUrl,
+        'types': meal.types,
+        'allergy': meal.allergy,
+        'fasting': meal.fasting,
+        'origin': meal.origin,
       }),
     );
+    print(response.body);
     if (response.statusCode == 200) {
       return Meal.fromJson(jsonDecode(response.body));
     } else {

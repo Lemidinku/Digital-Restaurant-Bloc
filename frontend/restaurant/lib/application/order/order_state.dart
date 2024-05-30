@@ -28,3 +28,12 @@ class OrderError extends OrderState {
   @override
   List<Object> get props => [message];
 }
+
+class OrderAdded extends OrderState {
+  final Order order;
+
+  const OrderAdded({required this.order});
+
+  @override
+  List<Object> get props => [order];
+}

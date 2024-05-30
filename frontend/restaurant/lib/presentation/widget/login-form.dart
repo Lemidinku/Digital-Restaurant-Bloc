@@ -52,12 +52,12 @@ class _LoginFormState extends State<LoginForm> {
             TextFormField(
               keyboardType: TextInputType.text,
               controller: usernameController,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your username';
-                }
-                return null;
-              },
+              // validator: (value) {
+              //   if (value == null || value.isEmpty) {
+              //     return 'Please enter your username';
+              //   }
+              //   return null;
+              // },
               decoration: InputDecoration(
                 hintText: 'Enter your username',
                 border: OutlineInputBorder(
@@ -81,12 +81,12 @@ class _LoginFormState extends State<LoginForm> {
             TextFormField(
               obscureText: true,
               controller: passwordController,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your password';
-                }
-                return null;
-              },
+              // validator: (value) {
+              //   if (value == null || value.isEmpty) {
+              //     return 'Please enter your password';
+              //   }
+              //   return null;
+              // },
               decoration: InputDecoration(
                 hintText: 'Enter your password',
                 border: OutlineInputBorder(
@@ -104,14 +104,13 @@ class _LoginFormState extends State<LoginForm> {
             const SizedBox(height: 30.0),
             ElevatedButton(
               onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  BlocProvider.of<AuthBloc>(context).add(AuthLogin(
-                    username: usernameController.text,
-                    password: passwordController.text,
-                  ));
-                  print(
-                      usernameController.text + ' ' + passwordController.text);
-                }
+                // if (_formKey.currentState!.validate()) {
+                BlocProvider.of<AuthBloc>(context).add(AuthLogin(
+                  username: usernameController.text,
+                  password: passwordController.text,
+                ));
+                print(usernameController.text + ' ' + passwordController.text);
+                // }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFFF97300), // Background color

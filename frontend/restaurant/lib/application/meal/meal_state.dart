@@ -35,4 +35,12 @@ class MealSelectedButtonActionState extends mealActionState {}
 
 class mealselectedOrderButtonActionState extends mealActionState {}
 
-// 
+//
+class MealAdded extends MealState {
+  final Meal meal;
+
+  MealAdded({required this.meal});
+
+  @override
+  List<Object> get props => [meal];
+}
