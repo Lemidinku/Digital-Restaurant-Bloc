@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:ffi';
+import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:http/http.dart' as http;
 import '../../domain/user.dart';
 import '../../storage.dart';
@@ -44,5 +45,24 @@ class AuthRepository {
 
   Future<void> logout() async {
     await _secureStorage.delete('token');
+  }
+
+  Future<User?> authCheck() async {
+    print('in the repository authCheck');
+    final token = await _secureStorage.read('token');
+    if (token != null) {
+      final decodedToken = JWT.decode(token);
+
+      // Access the payload
+      final payload = decodedToken.payload;
+      print(payload);
+      return User(
+          id: payload['id'],
+          username: payload['username'],
+          phone: payload['phone'],
+          role: payload['roles'][0]);
+    } else {
+      return null;
+    }
   }
 }

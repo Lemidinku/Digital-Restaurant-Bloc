@@ -27,6 +27,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthUnauthenticated());
     });
 
+    on<AuthCheck>((event, emit) async {
+      print('in the auth_bloc authCheck');
+      final user = await authRepository.authCheck();
+      if (user != null) {
+        emit(AuthAuthenticated(user: user));
+      } else {
+        emit(AuthUnauthenticated());
+      }
+    });
+
     on<AuthSignUp>((event, emit) async {
       try {
         final success = await authRepository.signup(
