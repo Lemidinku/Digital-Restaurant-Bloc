@@ -34,6 +34,15 @@ class MealBloc extends Bloc<MealEvent, MealState> {
         emit(MealError(message: e.toString()));
       }
     });
+    on<UpdateMeal>((event, emit) async {
+      emit(MealLoading());
+      try {
+        final meal = await mealRepository.updateMeal(event.id, event.updates);
+        emit(MealAdded(meal: meal));
+      } catch (e) {
+        emit(MealError(message: e.toString()));
+      }
+    });
     on<OrderSelectedButtonEvent>(orderSelectedButtonEvent);
     on<OrderSelectedOrderButtonEvent>(orderSelectedOrderButtonEvent);
   }

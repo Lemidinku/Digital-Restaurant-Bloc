@@ -44,3 +44,12 @@ class MealAdded extends MealState {
   @override
   List<Object> get props => [meal];
 }
+
+class MealUpdated extends MealState {
+  final Meal meal;
+
+  MealUpdated({required this.meal});
+
+  @override
+  List<Object> get props => [meal];
+}
