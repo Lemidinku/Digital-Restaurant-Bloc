@@ -118,15 +118,14 @@ class _RegistrationFormState extends State<RegistrationForm> {
             const SizedBox(height: 30.0),
             ElevatedButton(
               onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  print(
-                      usernameController.text + ' ' + passwordController.text);
-                  BlocProvider.of<AuthBloc>(context).add(AuthSignUp(
-                    username: usernameController.text,
-                    password: passwordController.text,
-                    phone: phoneController.text,
-                  ));
-                }
+                // if (_formKey.currentState!.validate()) {
+                print(usernameController.text + ' ' + passwordController.text);
+                BlocProvider.of<AuthBloc>(context).add(AuthSignUp(
+                  username: usernameController.text,
+                  password: passwordController.text,
+                  phone: phoneController.text,
+                ));
+                // }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFFF97300), // Background color
