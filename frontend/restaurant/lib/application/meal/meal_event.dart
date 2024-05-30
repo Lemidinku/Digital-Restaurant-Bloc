@@ -39,8 +39,10 @@ class DeleteMeal extends MealEvent {
 
 class OrderSelectedButtonEvent extends MealEvent {
   final Meal clickedMeals;
+  final int quantity;
 
-  OrderSelectedButtonEvent({required this.clickedMeals});
+  OrderSelectedButtonEvent(
+      {required this.clickedMeals, required this.quantity});
 }
 
 class OrderSelectedOrderButtonEvent extends MealEvent {}

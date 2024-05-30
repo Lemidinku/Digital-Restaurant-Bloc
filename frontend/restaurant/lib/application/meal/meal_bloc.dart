@@ -41,7 +41,7 @@ class MealBloc extends Bloc<MealEvent, MealState> {
   FutureOr<void> orderSelectedButtonEvent(
       OrderSelectedButtonEvent event, Emitter<MealState> emit) {
     print('item selected');
-    orderedItems.add(event.clickedMeals);
+    orderedItems[event.clickedMeals] = event.quantity;
 
     emit(MealSelectedButtonActionState());
   }

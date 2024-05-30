@@ -5,6 +5,7 @@ import 'package:restaurant/Infrastructure/repositories/orderedItems.dart';
 import 'package:restaurant/application/cart/cart_bloc.dart';
 import 'package:restaurant/application/meal/meal_bloc.dart';
 import 'package:restaurant/domain/meal.dart';
+import 'package:restaurant/presentation/addsubmit.dart';
 
 class SelectedOrderPage extends StatefulWidget {
   @override
@@ -45,7 +46,9 @@ class _SelectedOrderPageState extends State<SelectedOrderPage> {
                     child: ListView.builder(
                       itemCount: successState.orders.length,
                       itemBuilder: (context, index) {
-                        final foodItem = successState.orders[index];
+                        final meal = state.orders.keys.elementAt(index);
+                        final quantity = state.orders.values.elementAt(index);
+
                         return Card(
                           margin: EdgeInsets.all(8.0),
                           child: ListTile(
@@ -55,21 +58,21 @@ class _SelectedOrderPageState extends State<SelectedOrderPage> {
                               height: 80,
                               fit: BoxFit.cover,
                             ),
-                            title: Text(foodItem.name),
+                            title: Text(meal.name),
                             subtitle: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                    'Price: \$${foodItem.price.toStringAsFixed(2)}'),
-                                // Text('Quantity: ${foodItem.quantity}'),
-                                Text('Quantity: 2'),
+                                    'Price: \$${meal.price.toStringAsFixed(2)}'),
+                                Text('Quantity: ${quantity}'),
                               ],
                             ),
                             trailing: IconButton(
                               icon: Icon(Icons.clear),
                               onPressed: () {
-                                context.read<CartBloc>().add(
-                                    CartRemoveEvent(removedMeals: foodItem));
+                                context
+                                    .read<CartBloc>()
+                                    .add(CartRemoveEvent(removedMeals: meal));
                               },
                             ),
                           ),
@@ -78,7 +81,12 @@ class _SelectedOrderPageState extends State<SelectedOrderPage> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return SubmitOrderPage();
+                      }));
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
                       elevation: 3,

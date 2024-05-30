@@ -101,9 +101,8 @@ class OrderTail extends StatelessWidget {
                     onPressed: () {
                       // MealBloc.add(
                       //     OrderSelectedButtonEvent(clickedMeals: orders));
-                      context
-                          .read<MealBloc>()
-                          .add(OrderSelectedButtonEvent(clickedMeals: orders));
+                      context.read<MealBloc>().add(OrderSelectedButtonEvent(
+                          clickedMeals: orders, quantity: 5));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFFF97350),

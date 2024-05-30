@@ -11,7 +11,7 @@ final class CartInitial extends CartState {}
 class CartLoaddingState extends CartState {}
 
 class CartSuccessState extends CartState {
-  final List<Meal> orders;
+  final Map<Meal, int> orders;
   CartSuccessState({
     required this.orders,
   });
