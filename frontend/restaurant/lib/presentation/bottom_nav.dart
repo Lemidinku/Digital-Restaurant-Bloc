@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant/presentation/home.dart';
+import 'package:restaurant/presentation/login_page.dart';
 import 'package:restaurant/presentation/order_now.dart';
-import 'package:restaurant/presentation/welcome-screen.dart';
-// import 'package:restaurant_review/presentation/screens/Profile_page.dart';
-// import 'package:restaurant_review/presentation/screens/home_page.dart';
-// import 'package:restaurant_review/presentation/screens/search_page.dart';
 
 class BottomNav extends StatefulWidget {
   const BottomNav({super.key});
@@ -23,7 +20,7 @@ class _BottomNavState extends State<BottomNav> {
     });
   }
 
-  List _pages = [HomePage(), OrderNowPage(), WelcomePage()];
+  List _pages = [HomePage(), OrderNowPage(), LoginPage()];
 
   @override
   Widget build(BuildContext context) {

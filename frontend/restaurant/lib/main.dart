@@ -5,7 +5,6 @@ import 'package:restaurant/application/order/order_bloc.dart';
 import 'package:restaurant/presentation/bottom_nav.dart';
 import 'package:restaurant/presentation/login_page.dart';
 import 'package:restaurant/presentation/signup_page.dart';
-import 'package:restaurant/presentation/welcome-screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'application/auth/auth_bloc.dart';
 import 'application/meal/meal_bloc.dart';
