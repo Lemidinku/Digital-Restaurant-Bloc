@@ -5,7 +5,17 @@ import 'package:restaurant/application/meal/meal_bloc.dart';
 import 'package:restaurant/domain/meal.dart';
 import 'package:restaurant/presentation/admin/component/editMealform.dart';
 
-class AddedFoodsPage extends StatelessWidget {
+class AddedFoodsPage extends StatefulWidget {
+  @override
+  State<AddedFoodsPage> createState() => _AddedFoodsPageState();
+}
+
+class _AddedFoodsPageState extends State<AddedFoodsPage> {
+  void initState() {
+    context.read<MealBloc>().add(LoadMeals());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MealBloc, MealState>(

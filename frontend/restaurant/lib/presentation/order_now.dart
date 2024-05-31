@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:restaurant/application/meal/meal_bloc.dart';
 import 'package:restaurant/presentation/detail.dart';
 import 'package:restaurant/presentation/widget/rating_stars.dart';
@@ -16,6 +17,11 @@ class OrderNowPage extends StatefulWidget {
 }
 
 class _ResturantOrderPage extends State<OrderNowPage> {
+  void initState() {
+    context.read<MealBloc>().add(LoadMeals());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MealBloc, MealState>(

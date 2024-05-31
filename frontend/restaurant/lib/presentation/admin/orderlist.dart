@@ -8,19 +8,6 @@ void main() {
   runApp(const OrdersListPage());
 }
 
-// class OrderList extends StatelessWidget {
-//   const OrderList({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: 'Project',
-//       theme: ThemeData(primarySwatch: Colors.deepOrange),
-//       home: OrdersListPage(),
-//     );
-//   }
-// }
-
 class OrdersListPage extends StatefulWidget {
   const OrdersListPage({Key? key}) : super(key: key);
 
@@ -29,6 +16,11 @@ class OrdersListPage extends StatefulWidget {
 }
 
 class _OrdersListPageState extends State<OrdersListPage> {
+  void initState() {
+    context.read<OrderBloc>().add(LoadOrders());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     // Sample list of orders
