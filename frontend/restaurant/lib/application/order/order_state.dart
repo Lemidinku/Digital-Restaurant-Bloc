@@ -7,6 +7,8 @@ abstract class OrderState extends Equatable {
   List<Object> get props => [];
 }
 
+abstract class OrderActionState extends OrderState {}
+
 class OrderInitial extends OrderState {}
 
 class OrderLoading extends OrderState {}

@@ -95,6 +95,7 @@ class _SubmitOrderPageState extends State<SubmitOrderPage> {
           content: Text(
               'Order submitted successfully! Phone: $phone, Location: $location')),
     );
+    orderedItems.clear();
 
     // Optionally, you can navigate back to the previous screen or clear the form
     _formKey.currentState!.reset();

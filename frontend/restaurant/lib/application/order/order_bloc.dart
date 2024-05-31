@@ -16,6 +16,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       try {
         final orders = await orderRepository.fetchOrders();
         emit(OrderLoaded(orders: orders));
+        print('loaded sucessfull');
       } catch (e) {
         emit(OrderError(message: e.toString()));
       }

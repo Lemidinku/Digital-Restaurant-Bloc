@@ -4,6 +4,7 @@ import 'package:restaurant/presentation/home.dart';
 import 'package:restaurant/presentation/login_page.dart';
 import 'package:restaurant/presentation/order_now.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restaurant/presentation/profilepage.dart';
 
 class BottomNav extends StatefulWidget {
   const BottomNav({super.key});
@@ -22,7 +23,14 @@ class _BottomNavState extends State<BottomNav> {
     });
   }
 
-  List _pages = [HomePage(), OrderNowPage(), LoginPage()];
+  List _pages = [
+    HomePage(),
+    OrderNowPage(),
+    ProfilePage(
+        userName: 'chachi',
+        userPhotoUrl:
+            'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png')
+  ];
 
   @override
   Widget build(BuildContext context) {

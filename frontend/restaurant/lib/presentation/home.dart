@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:restaurant/presentation/detail.dart';
+import 'package:restaurant/presentation/order_now.dart';
 import 'package:restaurant/presentation/widget/rating_stars.dart';
 import 'package:restaurant/presentation/widget/built_item_card.dart';
 import 'package:restaurant/presentation/widget/meal_col_widget.dart';
@@ -144,21 +145,26 @@ class _RestaurantHomePageState extends State<HomePage> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  Center(
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        backgroundColor: const Color(0xFFF97350),
-                        elevation: 0,
-                        minimumSize: const Size(221, 37),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                      ),
-                      child: const Text('Order Now'),
-                    ),
-                  ),
+                  // Center(
+                  //   child: ElevatedButton(
+                  //     onPressed: () {
+                  //       Navigator.push(context,
+                  //           MaterialPageRoute(builder: (context) {
+                  //         return OrderNowPage();
+                  //       }));
+                  //     },
+                  //     style: ElevatedButton.styleFrom(
+                  //       foregroundColor: Colors.white,
+                  //       backgroundColor: const Color(0xFFF97350),
+                  //       elevation: 0,
+                  //       minimumSize: const Size(221, 37),
+                  //       shape: RoundedRectangleBorder(
+                  //         borderRadius: BorderRadius.circular(15),
+                  //       ),
+                  //     ),
+                  //     child: const Text('Order Now'),
+                  //   ),
+                  // ),
                 ],
               ),
             );

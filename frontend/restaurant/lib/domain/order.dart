@@ -21,5 +21,7 @@ class Order {
   });
 
   factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
+
+  set isCompleted(bool isCompleted) {}
   Map<String, dynamic> toJson() => _$OrderToJson(this);
 }
