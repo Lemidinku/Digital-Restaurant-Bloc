@@ -71,9 +71,9 @@ class _AddFoodPageState extends State<AddFoodPage> {
                 decoration: const InputDecoration(
                   labelText: 'Food Name',
                   labelStyle: TextStyle(
-                    color: Colors.red, // Change label text color
-                    fontSize: 16.0, // Change label text size
-                    fontWeight: FontWeight.bold, // Make label text bold
+                    color: Colors.red,
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 validator: (value) {
@@ -89,9 +89,9 @@ class _AddFoodPageState extends State<AddFoodPage> {
                 decoration: const InputDecoration(
                   labelText: 'Food Description',
                   labelStyle: TextStyle(
-                    color: Colors.red, // Change label text color
-                    fontSize: 16.0, // Change label text size
-                    fontWeight: FontWeight.bold, // Make label text bold
+                    color: Colors.red,
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 validator: (value) {
@@ -107,9 +107,9 @@ class _AddFoodPageState extends State<AddFoodPage> {
                 decoration: const InputDecoration(
                   labelText: 'Price',
                   labelStyle: TextStyle(
-                    color: Colors.red, // Change label text color
-                    fontSize: 16.0, // Change label text size
-                    fontWeight: FontWeight.bold, // Make label text bold
+                    color: Colors.red,
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 keyboardType: TextInputType.number,
@@ -126,9 +126,9 @@ class _AddFoodPageState extends State<AddFoodPage> {
                 decoration: const InputDecoration(
                   labelText: 'Photo Link',
                   labelStyle: TextStyle(
-                    color: Colors.red, // Change label text color
-                    fontSize: 16.0, // Change label text size
-                    fontWeight: FontWeight.bold, // Make label text bold
+                    color: Colors.red,
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 validator: (value) {
@@ -144,9 +144,9 @@ class _AddFoodPageState extends State<AddFoodPage> {
                 decoration: const InputDecoration(
                   labelText: 'Origin',
                   labelStyle: TextStyle(
-                    color: Colors.red, // Change label text color
-                    fontSize: 16.0, // Change label text size
-                    fontWeight: FontWeight.bold, // Make label text bold
+                    color: Colors.red,
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 validator: (value) {
@@ -305,7 +305,6 @@ class _AddFoodPageState extends State<AddFoodPage> {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
 
-                    // Collect form data
                     final foodName = _foodNameController.text;
                     final description = _descriptionController.text;
                     final price = double.parse(_priceController.text);
