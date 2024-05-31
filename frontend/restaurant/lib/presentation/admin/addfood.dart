@@ -83,7 +83,7 @@ class _AddFoodPageState extends State<AddFoodPage> {
                   return null;
                 },
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               TextFormField(
                 controller: _descriptionController,
                 decoration: const InputDecoration(
@@ -101,7 +101,7 @@ class _AddFoodPageState extends State<AddFoodPage> {
                   return null;
                 },
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               TextFormField(
                 controller: _priceController,
                 decoration: const InputDecoration(
@@ -120,7 +120,7 @@ class _AddFoodPageState extends State<AddFoodPage> {
                   return null;
                 },
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               TextFormField(
                 controller: _photoLinkController,
                 decoration: const InputDecoration(
@@ -209,7 +209,7 @@ class _AddFoodPageState extends State<AddFoodPage> {
                   });
                 },
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               const Text(
                 'Food Kind:',
                 style: TextStyle(
@@ -230,7 +230,7 @@ class _AddFoodPageState extends State<AddFoodPage> {
                       });
                     },
                   ),
-                  Text('Fasting'),
+                  const Text('Fasting'),
                   Radio(
                     value: true,
                     groupValue: _isFasting,
@@ -242,10 +242,10 @@ class _AddFoodPageState extends State<AddFoodPage> {
                       });
                     },
                   ),
-                  Text('Non-Fasting'),
+                  const Text('Non-Fasting'),
                 ],
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               const Text(
                 'Allergy:',
                 style: TextStyle(
@@ -256,7 +256,7 @@ class _AddFoodPageState extends State<AddFoodPage> {
               ),
               Row(
                 children: [
-                  Text('Milk'),
+                  const Text('Milk'),
                   Radio(
                     value: 'Milk',
                     groupValue: _allergy,
@@ -266,7 +266,7 @@ class _AddFoodPageState extends State<AddFoodPage> {
                       });
                     },
                   ),
-                  Text('Nuts'),
+                  const Text('Nuts'),
                   Radio(
                     value: 'Nuts',
                     groupValue: _allergy,
@@ -276,7 +276,7 @@ class _AddFoodPageState extends State<AddFoodPage> {
                       });
                     },
                   ),
-                  Text('Fish'),
+                  const Text('Fish'),
                   Radio(
                     value: 'Fish',
                     groupValue: _allergy,
@@ -286,7 +286,7 @@ class _AddFoodPageState extends State<AddFoodPage> {
                       });
                     },
                   ),
-                  Text('Eggs'),
+                  const Text('Eggs'),
                   Radio(
                     value: 'Eggs',
                     groupValue: _allergy,

@@ -131,8 +131,6 @@ class _OrderTailState extends State<OrderTail> {
                       const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0),
                   child: ElevatedButton(
                       onPressed: () {
-                        // MealBloc.add(
-                        //     OrderSelectedButtonEvent(clickedMeals: orders));
                         _toggleSelection();
 
                         context.read<MealBloc>().add(OrderSelectedButtonEvent(
