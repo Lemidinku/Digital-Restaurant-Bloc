@@ -41,7 +41,7 @@ class OrderRepository {
         'location': order.location,
       }),
     );
-    // print(response.body);
+
     if (response.statusCode == 200) {
       return Order.fromJson(jsonDecode(response.body));
     } else {
@@ -86,12 +86,4 @@ class OrderRepository {
       throw Exception('Failed to delete order');
     }
   }
-}
-
-// order repository test
-
-void main() {
-  String baseUrl = 'http://10.0.2.2:9000';
-  OrderRepository orderRepository = OrderRepository(baseUrl: baseUrl);
-  print(orderRepository.fetchOrders());
 }
