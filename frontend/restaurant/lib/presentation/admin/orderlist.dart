@@ -23,12 +23,8 @@ class _OrdersListPageState extends State<OrdersListPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Sample list of orders
-
     return BlocConsumer<OrderBloc, OrderState>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         switch (state.runtimeType) {
           case OrderError:
@@ -39,7 +35,7 @@ class _OrdersListPageState extends State<OrdersListPage> {
             print(state.orders[0].meals);
             return Scaffold(
               appBar: AppBar(
-                title: Text(
+                title: const Text(
                   'OrdersListPage',
                   style: TextStyle(
                       fontSize: 30.0,
@@ -65,7 +61,7 @@ class _OrdersListPageState extends State<OrdersListPage> {
 class OrderCard extends StatefulWidget {
   final Order order;
 
-  const OrderCard({Key? key, required this.order}) : super(key: key);
+  const OrderCard({super.key, required this.order});
 
   @override
   _OrderCardState createState() => _OrderCardState();
@@ -75,14 +71,13 @@ class _OrderCardState extends State<OrderCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(8.0),
-
-      elevation: 5, // Add elevation for box shadow
+      margin: const EdgeInsets.all(8.0),
+      elevation: 5,
       shadowColor: Colors.grey,
       child: ListTile(
         title: Text(
           'Order: ${widget.order.id}',
-          style: TextStyle(
+          style: const TextStyle(
               fontSize: 20.0,
               fontWeight: FontWeight.bold,
               color: Colors.deepOrange),
@@ -92,17 +87,17 @@ class _OrderCardState extends State<OrderCard> {
           children: [
             Row(
               children: [
-                Text('Food: '),
+                const Text('Food: '),
                 ...widget.order.meals.entries.map(
                   (entry) => Text(
                     '${entry.key} ${entry.value}${entry == widget.order.meals.entries.last ? '' : ', '}',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
             ),
             Text('Price: ${widget.order.totalPrice}'),
-            Text('Date: 2025/5/2'),
+            const Text('Date: 2025/5/2'),
           ],
         ),
         trailing: IconButton(
