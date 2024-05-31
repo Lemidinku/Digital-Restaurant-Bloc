@@ -23,19 +23,17 @@ class _SelectedOrderPageState extends State<SelectedOrderPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Selected Orders'),
+        title: const Text('Selected Orders'),
         backgroundColor: Colors.deepOrange,
       ),
       body: BlocConsumer<CartBloc, CartState>(
-        listener: (context, state) {
-          // TODO: implement listener
-        },
+        listener: (context, state) {},
         listenWhen: (previous, current) => current is CartActionState,
         buildWhen: (previous, current) => current is! CartActionState,
         builder: (context, state) {
           switch (state.runtimeType) {
             case CartLoaddingState:
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             case CartSuccessState:
@@ -50,7 +48,7 @@ class _SelectedOrderPageState extends State<SelectedOrderPage> {
                         final quantity = state.orders.values.elementAt(index);
 
                         return Card(
-                          margin: EdgeInsets.all(8.0),
+                          margin: const EdgeInsets.all(8.0),
                           child: ListTile(
                             leading: Image.asset(
                               'assets/Pizza.jpg',
@@ -100,14 +98,14 @@ class _SelectedOrderPageState extends State<SelectedOrderPage> {
                       style: TextStyle(color: Color(0xFFF97350)),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   )
                 ],
               );
             default:
               return Container(
-                child: Center(
+                child: const Center(
                   child: Text('NO Items In the Cart'),
                 ),
               );

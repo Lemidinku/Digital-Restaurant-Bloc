@@ -30,14 +30,14 @@ class _ResturantOrderPage extends State<OrderNowPage> {
       listener: (context, state) {
         if (state is MealSelectedButtonActionState) {
           ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text('Item selected')));
+              .showSnackBar(const SnackBar(content: Text('Item selected')));
         }
         // TODO: implement listener
       },
       builder: (context, state) {
         switch (state.runtimeType) {
           case MealLoading:
-            return Scaffold(
+            return const Scaffold(
               body: Center(
                 child: CircularProgressIndicator(),
               ),
@@ -129,10 +129,10 @@ class _ResturantOrderPage extends State<OrderNowPage> {
                       itemCount: successState.meals.length,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, // Number of columns
-                        mainAxisSpacing: 8.0, // Spacing between rows
-                        crossAxisSpacing: 8.0, // Spacing between columns
-                        childAspectRatio: 0.7, // Aspect ratio of each item
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 8.0,
+                        crossAxisSpacing: 8.0,
+                        childAspectRatio: 0.7,
                       ),
                       itemBuilder: (context, index) {
                         return OrderTail(
@@ -145,7 +145,7 @@ class _ResturantOrderPage extends State<OrderNowPage> {
               ),
             );
           default:
-            return SizedBox();
+            return const SizedBox();
         }
       },
     );

@@ -11,36 +11,33 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthBloc, AuthState>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         switch (state.runtimeType) {
           case AuthAuthenticated:
             final successState = state as AuthAuthenticated;
             return Scaffold(
               appBar: AppBar(
-                title: Text('Profile'),
+                title: const Text('Profile'),
               ),
               body: Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    CircleAvatar(
+                    const CircleAvatar(
                       radius: 80,
                       backgroundImage: NetworkImage(
-                          'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png'), // Use the user's photo URL here
+                          'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png'),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Text(
-                      successState
-                          .user.username, // Display the user's name here
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      successState.user.username,
+                      style: const TextStyle(
+                          fontSize: 24, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 20),
-                    Card(
+                    const SizedBox(height: 20),
+                    const Card(
                       child: ListTile(
                         leading: Icon(Icons.shopping_basket),
                         title: Text('Order'),
@@ -49,8 +46,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     Card(
                       child: ListTile(
-                        leading: Icon(Icons.phone),
-                        title: Text('Phone'),
+                        leading: const Icon(Icons.phone),
+                        title: const Text('Phone'),
                         subtitle: Text(successState.user.phone),
                       ),
                     ),
@@ -59,7 +56,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             );
           default:
-            return Center(
+            return const Center(
               child: Text('The Token is Expired '),
             );
         }
