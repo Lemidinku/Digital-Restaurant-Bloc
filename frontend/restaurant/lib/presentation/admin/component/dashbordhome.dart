@@ -150,7 +150,7 @@ class AddedFoodCard extends StatelessWidget {
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },
-                                  child: Text('Cancel'),
+                                  child: const Text('Cancel'),
                                 ),
                                 TextButton(
                                   onPressed: () {
@@ -159,7 +159,7 @@ class AddedFoodCard extends StatelessWidget {
                                         id: addedFood.id.toString()));
                                     context.read<MealBloc>().add(LoadMeals());
                                   },
-                                  child: Text('Delete'),
+                                  child: const Text('Delete'),
                                 ),
                               ],
                             );
