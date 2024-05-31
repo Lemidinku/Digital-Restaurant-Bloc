@@ -32,7 +32,6 @@ class _ResturantOrderPage extends State<OrderNowPage> {
           ScaffoldMessenger.of(context)
               .showSnackBar(const SnackBar(content: Text('Item selected')));
         }
-        // TODO: implement listener
       },
       builder: (context, state) {
         switch (state.runtimeType) {

@@ -41,22 +41,17 @@ class _RestaurantHomePageState extends State<HomePage> {
     context.read<MealBloc>().add(LoadMeals());
     super.initState();
   }
-  // context
-  //                                   .read<CartBloc>()
-  //                                   .add(CartRemoveEvent(removedMeals: meal));
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MealBloc, MealState>(
       listenWhen: (previous, current) => current is mealActionState,
       buildWhen: (previous, current) => current is! mealActionState,
-      listener: (context, state) {
-        // TODO: implement listener
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         switch (state.runtimeType) {
           case MealLoading:
-            return Scaffold(
+            return const Scaffold(
               body: Center(
                 child: CircularProgressIndicator(),
               ),
@@ -92,7 +87,7 @@ class _RestaurantHomePageState extends State<HomePage> {
                   SizedBox(
                     height: 160,
                     child: PageView(
-                      children: [
+                      children: const [
                         FlashOfferCard(
                           title: 'Flash Offer',
                           description:
@@ -134,15 +129,14 @@ class _RestaurantHomePageState extends State<HomePage> {
                       itemCount: successState.meals.length,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, // Number of columns
-                        mainAxisSpacing: 10.0, // Spacing between rows
-                        crossAxisSpacing: 10.0, // Spacing between columns
-                        childAspectRatio: 0.7, // Aspect ratio of each item
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 10.0,
+                        crossAxisSpacing: 10.0,
+                        childAspectRatio: 0.7,
                       ),
                       itemBuilder: (context, index) {
                         return MealTail(
                           meals: successState.meals[index],
-                          // mealBloc: mealBloc,
                         );
                       },
                     ),

@@ -23,7 +23,5 @@ class SecureStorage {
     await _storage.delete(key: key);
   }
 
-  Future<void> _initialize() async {
-    // my initialization code, if any is needed
-  }
+  Future<void> _initialize() async {}
 }
