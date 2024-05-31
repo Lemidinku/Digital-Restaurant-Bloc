@@ -19,12 +19,13 @@ class AddOrder extends OrderEvent {
 }
 
 class UpdateOrder extends OrderEvent {
-  final Order order;
+  final int id;
+  final bool completed;
 
-  const UpdateOrder({required this.order});
+  const UpdateOrder({required this.id, required this.completed});
 
   @override
-  List<Object> get props => [order];
+  List<Object> get props => [id, completed];
 }
 
 class DeleteOrder extends OrderEvent {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:restaurant/application/cart/cart_bloc.dart';
 import 'package:restaurant/application/order/order_bloc.dart';
 import 'package:restaurant/domain/order.dart';
 
@@ -110,6 +109,8 @@ class _OrderCardState extends State<OrderCard> {
           onPressed: () {
             setState(() {
               widget.order.isCompleted = !widget.order.completed;
+              context.read<OrderBloc>().add(UpdateOrder(
+                  id: widget.order.id, completed: !widget.order.completed));
             });
           },
         ),

@@ -35,7 +35,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     on<UpdateOrder>((event, emit) async {
       try {
         await orderRepository.updateOrder(
-            id: event.order.id, completed: event.order.completed);
+            id: event.id, completed: event.completed);
         final orders = await orderRepository.fetchOrders();
         emit(OrderLoaded(orders: orders));
       } catch (e) {
