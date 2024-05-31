@@ -18,7 +18,7 @@ import './Infrastructure/repositories/auth_repository.dart';
 import './Infrastructure/repositories/meal_repository.dart';
 import './presentation/selectedorder.dart';
 
-final _router = GoRouter(initialLocation: "/signup", routes: [
+final _router = GoRouter(initialLocation: "/login", routes: [
   GoRoute(
     name: "signup",
     path: '/signup',

@@ -37,8 +37,11 @@ class _LoginFormState extends State<LoginForm> {
       listener: (context, state) {
         if (state is AuthAuthenticated) {
           print("Login successful");
-
-          GoRouter.of(context).go('/admin');
+          if (state.user.role == 'admin') {
+            GoRouter.of(context).go('/admin');
+          } else {
+            GoRouter.of(context).go('/entry');
+          }
         } else if (state is AuthError) {
           print("login not successful");
           ScaffoldMessenger.of(context)
