@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:restaurant/application/auth/auth_bloc.dart';
 import 'package:restaurant/presentation/home.dart';
 import 'package:restaurant/presentation/login_page.dart';
@@ -23,15 +24,7 @@ class _BottomNavState extends State<BottomNav> {
     });
   }
 
-  List _pages = [
-    HomePage(),
-    OrderNowPage(),
-    ProfilePage(
-        userName: 'chachi',
-        userPhotoUrl:
-            'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png')
-  ];
-
+  List _pages = [HomePage(), OrderNowPage(), ProfilePage()];
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
@@ -100,7 +93,7 @@ void _showLogoutConfirmationDialog(BuildContext context) {
           TextButton(
             child: Text("Logout"),
             onPressed: () {
-              Navigator.of(context).pop();
+              GoRouter.of(context).go('/login');
               context.read<AuthBloc>().add(AuthLogout());
             },
           ),

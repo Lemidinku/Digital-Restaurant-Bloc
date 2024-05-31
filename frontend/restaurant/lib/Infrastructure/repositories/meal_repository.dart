@@ -16,10 +16,10 @@ class MealRepository {
       'Content-Type': 'application/json; charset=UTF-8',
       "authorization": "Bearer $token",
     });
-    print(json.decode(response.body));
+    // print(json.decode(response.body));
     if (response.statusCode == 200) {
       List<dynamic> body = json.decode(response.body);
-      print(body);
+      // print(body);
       return body.map((dynamic item) => Meal.fromJson(item)).toList();
     } else {
       throw Exception('Failed to load meals');
@@ -56,16 +56,16 @@ class MealRepository {
 
   Future<Meal> updateMeal(String id, Map<String, dynamic> updates) async {
     String? token = await _secureStorage.read('token');
-    final response = await http.put(
+    final response = await http.patch(
       Uri.parse('$baseUrl/meals/$id'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         "authorization": "Bearer $token",
       },
-      body: jsonEncode(<String, String>{
+      body: jsonEncode(<String, dynamic>{
         'name': updates['name'],
         'description': updates['description'],
-        'price': updates['price'],
+        'price': double.parse(updates['price']),
         'imageUrl': updates['imageUrl'],
       }),
     );
@@ -90,12 +90,4 @@ class MealRepository {
       throw Exception('Failed to delete meal');
     }
   }
-}
-
-// meal repository test
-
-void main() {
-  String baseUrl = 'http://10.0.2.2:9000';
-  MealRepository mealRepository = MealRepository(baseUrl: baseUrl);
-  print(mealRepository.fetchMeals());
 }

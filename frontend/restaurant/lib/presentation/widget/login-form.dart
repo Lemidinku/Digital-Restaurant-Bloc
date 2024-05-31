@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../application/auth/auth_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +19,6 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   void dispose() {
-    // Clean up the controllers when the widget is disposed.
     usernameController.dispose();
     passwordController.dispose();
     super.dispose();
@@ -37,11 +37,12 @@ class _LoginFormState extends State<LoginForm> {
       listener: (context, state) {
         if (state is AuthAuthenticated) {
           print("Login successful");
-          Navigator.pushReplacementNamed(context, '/admin');
+
+          GoRouter.of(context).go('/admin');
         } else if (state is AuthError) {
           print("login not successful");
           ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text("Login failed")));
+              .showSnackBar(const SnackBar(content: Text("Login failed")));
         }
       },
       child: Container(
@@ -59,20 +60,13 @@ class _LoginFormState extends State<LoginForm> {
             TextFormField(
               keyboardType: TextInputType.text,
               controller: usernameController,
-              // validator: (value) {
-              //   if (value == null || value.isEmpty) {
-              //     return 'Please enter your username';
-              //   }
-              //   return null;
-              // },
               decoration: InputDecoration(
                 hintText: 'Enter your username',
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(
-                      15.0), // Adjust the radius here for more or less curve
+                  borderRadius: BorderRadius.circular(15.0),
                   borderSide: const BorderSide(
-                    color: Colors.grey, // Set border color
-                    width: 1.0, // Set border width
+                    color: Colors.grey,
+                    width: 1.0,
                   ),
                 ),
                 contentPadding: const EdgeInsets.symmetric(
@@ -88,30 +82,22 @@ class _LoginFormState extends State<LoginForm> {
             TextFormField(
               obscureText: true,
               controller: passwordController,
-              // validator: (value) {
-              //   if (value == null || value.isEmpty) {
-              //     return 'Please enter your password';
-              //   }
-              //   return null;
-              // },
               decoration: InputDecoration(
                 hintText: 'Enter your password',
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(
-                      15.0), // Adjust the radius here for more or less curve
+                  borderRadius: BorderRadius.circular(15.0),
                   borderSide: const BorderSide(
-                    color: Colors.grey, // Set border color
-                    width: 1.0, // Set border width
+                    color: Colors.grey,
+                    width: 1.0,
                   ),
                 ),
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                contentPadding: const EdgeInsets.symmetric(
+                    vertical: 10.0, horizontal: 20.0),
               ),
             ),
             const SizedBox(height: 30.0),
             ElevatedButton(
               onPressed: () {
-                // if (_formKey.currentState!.validate()) {
                 BlocProvider.of<AuthBloc>(context).add(AuthLogin(
                   username: usernameController.text,
                   password: passwordController.text,
@@ -120,7 +106,7 @@ class _LoginFormState extends State<LoginForm> {
                 // }
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFF97300), // Background color
+                backgroundColor: const Color(0xFFF97300),
                 padding: const EdgeInsets.symmetric(vertical: 10.0),
               ),
               child: Text(

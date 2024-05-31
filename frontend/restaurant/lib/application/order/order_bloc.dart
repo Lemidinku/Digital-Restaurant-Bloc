@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import '../../domain/order.dart';
@@ -15,6 +14,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       emit(OrderLoading());
       try {
         final orders = await orderRepository.fetchOrders();
+        print(orders);
         emit(OrderLoaded(orders: orders));
         print('loaded sucessfull');
       } catch (e) {
@@ -35,7 +35,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     on<UpdateOrder>((event, emit) async {
       try {
         await orderRepository.updateOrder(
-            id: event.order.id, completed: event.order.completed);
+            id: event.id, completed: event.completed);
         final orders = await orderRepository.fetchOrders();
         emit(OrderLoaded(orders: orders));
       } catch (e) {

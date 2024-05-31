@@ -91,11 +91,4 @@ class MealBloc extends Bloc<MealEvent, MealState> {
   //     } catch (e) {
   //       yield MealError(message: e.toString());
   //     }
-  //   } else if (event is AddMeal) {
-  //     // Handle AddMeal event
-  //   } else if (event is UpdateMeal) {
-  //     // Handle UpdateMeal event
-  //   } else if (event is DeleteMeal) {
-  //     // Handle DeleteMeal event
-  //   }
   // }
