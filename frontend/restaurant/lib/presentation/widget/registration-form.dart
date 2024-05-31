@@ -21,7 +21,6 @@ class _RegistrationFormState extends State<RegistrationForm> {
 
   @override
   void dispose() {
-    // Clean up the controllers when the widget is disposed.
     usernameController.dispose();
     passwordController.dispose();
     phoneController.dispose();
@@ -59,11 +58,10 @@ class _RegistrationFormState extends State<RegistrationForm> {
               decoration: InputDecoration(
                 hintText: 'Enter your username',
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(
-                      15.0), // Adjust the radius here for more or less curve
+                  borderRadius: BorderRadius.circular(15.0),
                   borderSide: const BorderSide(
-                    color: Colors.grey, // Set border color
-                    width: 1.0, // Set border width
+                    color: Colors.grey,
+                    width: 1.0,
                   ),
                 ),
                 contentPadding: const EdgeInsets.symmetric(
@@ -82,11 +80,10 @@ class _RegistrationFormState extends State<RegistrationForm> {
               decoration: InputDecoration(
                 hintText: 'Enter your phone number',
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(
-                      15.0), // Adjust the radius here for more or less curve
+                  borderRadius: BorderRadius.circular(15.0),
                   borderSide: const BorderSide(
-                    color: Colors.grey, // Set border color
-                    width: 1.0, // Set border width
+                    color: Colors.grey,
+                    width: 1.0,
                   ),
                 ),
                 contentPadding: const EdgeInsets.symmetric(
@@ -105,11 +102,10 @@ class _RegistrationFormState extends State<RegistrationForm> {
               decoration: InputDecoration(
                 hintText: 'Enter your password',
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(
-                      15.0), // Adjust the radius here for more or less curve
+                  borderRadius: BorderRadius.circular(15.0),
                   borderSide: const BorderSide(
-                    color: Colors.grey, // Set border color
-                    width: 1.0, // Set border width
+                    color: Colors.grey,
+                    width: 1.0,
                   ),
                 ),
                 contentPadding:
@@ -129,7 +125,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                 // }
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFF97300), // Background color
+                backgroundColor: const Color(0xFFF97300),
                 padding: const EdgeInsets.symmetric(vertical: 10.0),
               ),
               child: Text(
