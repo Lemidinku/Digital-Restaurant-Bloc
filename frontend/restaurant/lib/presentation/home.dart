@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restaurant/Infrastructure/repositories/meal_repository.dart';
 
 import 'package:restaurant/presentation/detail.dart';
 import 'package:restaurant/presentation/order_now.dart';
@@ -35,12 +36,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _RestaurantHomePageState extends State<HomePage> {
-  // @override
-  // void initState(){
-  // mealBloc.add(LoadMeals());
-  // super.initState();}
-
-  // final MealBloc mealBloc = MealBloc();
+  @override
+  void initState() {
+    context.read<MealBloc>().add(LoadMeals());
+    super.initState();
+  }
+  // context
+  //                                   .read<CartBloc>()
+  //                                   .add(CartRemoveEvent(removedMeals: meal));
 
   @override
   Widget build(BuildContext context) {
