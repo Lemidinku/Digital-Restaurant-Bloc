@@ -16,9 +16,9 @@ class OrderRepository {
       'Content-Type': 'application/json; charset=UTF-8',
       "authorization": "Bearer $token",
     });
-    print(json.decode(response.body));
     if (response.statusCode == 200) {
       List<dynamic> body = json.decode(response.body);
+      print('in the order repository');
       print(body);
       return body.map((dynamic item) => Order.fromJson(item)).toList();
     } else {
@@ -41,7 +41,7 @@ class OrderRepository {
         'location': order.location,
       }),
     );
-    print(response.body);
+    // print(response.body);
     if (response.statusCode == 200) {
       return Order.fromJson(jsonDecode(response.body));
     } else {

@@ -39,8 +39,12 @@ class _OrdersListPageState extends State<OrdersListPage> {
       },
       builder: (context, state) {
         switch (state.runtimeType) {
+          case OrderError:
+            final error = state as OrderError;
+            return Center(child: Text(error.message));
           case OrderLoaded:
             final SuccessState = state as OrderLoaded;
+            print(state.orders[0].meals);
             return Scaffold(
               appBar: AppBar(
                 title: Text(
@@ -97,11 +101,12 @@ class _OrderCardState extends State<OrderCard> {
             Row(
               children: [
                 Text('Food: '),
-                for (var i = 0; i < widget.order.meals.length; i++)
-                  Text(
-                    '${widget.order.meals[i]} ${widget.order.meals[i]}${i == widget.order.meals.length - 1 ? '' : ', '}',
+                ...widget.order.meals.entries.map(
+                  (entry) => Text(
+                    '${entry.key} ${entry.value}${entry == widget.order.meals.entries.last ? '' : ', '}',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
+                ),
               ],
             ),
             Text('Price: ${widget.order.totalPrice}'),
@@ -116,9 +121,9 @@ class _OrderCardState extends State<OrderCard> {
             size: 40.0,
           ),
           onPressed: () {
-            // setState(() {
-            //   widget.order.isCompleted = !widget.order.completed;
-            // });
+            setState(() {
+              widget.order.isCompleted = !widget.order.completed;
+            });
           },
         ),
       ),
