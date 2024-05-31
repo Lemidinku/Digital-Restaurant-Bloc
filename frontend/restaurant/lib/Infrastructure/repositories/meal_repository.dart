@@ -69,6 +69,7 @@ class MealRepository {
         'imageUrl': updates['imageUrl'],
       }),
     );
+    print(response.body);
     if (response.statusCode == 200) {
       return Meal.fromJson(jsonDecode(response.body));
     } else {

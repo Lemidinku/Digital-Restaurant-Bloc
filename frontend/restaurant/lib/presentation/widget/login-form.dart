@@ -37,7 +37,7 @@ class _LoginFormState extends State<LoginForm> {
       listener: (context, state) {
         if (state is AuthAuthenticated) {
           print("Login successful");
-          Navigator.pushReplacementNamed(context, '/entry');
+          Navigator.pushReplacementNamed(context, '/admin');
         } else if (state is AuthError) {
           print("login not successful");
           ScaffoldMessenger.of(context)

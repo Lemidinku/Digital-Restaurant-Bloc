@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:restaurant/Infrastructure/repositories/order_repository.dart';
 import 'package:restaurant/application/cart/cart_bloc.dart';
 import 'package:restaurant/application/order/order_bloc.dart';
+import 'package:restaurant/presentation/admin/dashbord.dart';
+import 'package:restaurant/presentation/admin/orderlist.dart';
 import 'package:restaurant/presentation/bottom_nav.dart';
 import 'package:restaurant/presentation/login_page.dart';
 import 'package:restaurant/presentation/signup_page.dart';
@@ -59,12 +61,13 @@ class MyApp extends StatelessWidget {
               seedColor: const Color.fromRGBO(239, 108, 0, 1)),
           useMaterial3: true,
         ),
-        home: SignupPage(),
+        home: LoginPage(),
         routes: {
           '/entry': (context) => BottomNav(),
           '/selected': (context) => SelectedOrderPage(),
           '/login': (context) => LoginPage(),
-          '/signup': (context) => SignupPage()
+          '/signup': (context) => SignupPage(),
+          '/admin': (context) => AdminHome(title: 'Digital resturant'),
         },
       ),
     );
