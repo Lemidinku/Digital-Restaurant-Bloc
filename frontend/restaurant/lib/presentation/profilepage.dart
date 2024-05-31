@@ -1,52 +1,69 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restaurant/application/auth/auth_bloc.dart';
 
-class ProfilePage extends StatelessWidget {
-  final String userName;
-  final String userPhotoUrl;
+class ProfilePage extends StatefulWidget {
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
 
-  const ProfilePage(
-      {Key? key, required this.userName, required this.userPhotoUrl})
-      : super(key: key);
-
+class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Profile'),
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CircleAvatar(
-              radius: 80,
-              backgroundImage:
-                  NetworkImage(userPhotoUrl), // Use the user's photo URL here
-            ),
-            SizedBox(height: 20),
-            Text(
-              userName, // Display the user's name here
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 20),
-            Card(
-              child: ListTile(
-                leading: Icon(Icons.email),
-                title: Text('Email'),
-                subtitle: Text('user@example.com'),
+    return BlocConsumer<AuthBloc, AuthState>(
+      listener: (context, state) {
+        // TODO: implement listener
+      },
+      builder: (context, state) {
+        switch (state.runtimeType) {
+          case AuthAuthenticated:
+            final successState = state as AuthAuthenticated;
+            return Scaffold(
+              appBar: AppBar(
+                title: Text('Profile'),
               ),
-            ),
-            Card(
-              child: ListTile(
-                leading: Icon(Icons.phone),
-                title: Text('Phone'),
-                subtitle: Text('+1 123-456-7890'),
+              body: Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    CircleAvatar(
+                      radius: 80,
+                      backgroundImage: NetworkImage(
+                          'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png'), // Use the user's photo URL here
+                    ),
+                    SizedBox(height: 20),
+                    Text(
+                      successState
+                          .user.username, // Display the user's name here
+                      style:
+                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 20),
+                    Card(
+                      child: ListTile(
+                        leading: Icon(Icons.shopping_basket),
+                        title: Text('Order'),
+                        subtitle: Text('Explore Our Restaurant'),
+                      ),
+                    ),
+                    Card(
+                      child: ListTile(
+                        leading: Icon(Icons.phone),
+                        title: Text('Phone'),
+                        subtitle: Text(successState.user.phone),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
-      ),
+            );
+          default:
+            return Center(
+              child: Text('The Token is Expired '),
+            );
+        }
+      },
     );
   }
 }
