@@ -93,9 +93,4 @@ class MealBloc extends Bloc<MealEvent, MealState> {
   //     }
   //   } else if (event is AddMeal) {
   //     // Handle AddMeal event
-  //   } else if (event is UpdateMeal) {
-  //     // Handle UpdateMeal event
-  //   } else if (event is DeleteMeal) {
-  //     // Handle DeleteMeal event
-  //   }
   // }
