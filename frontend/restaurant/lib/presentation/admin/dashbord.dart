@@ -42,10 +42,7 @@ class _AdminHomeState extends State<AdminHome> {
         actions: [
           IconButton(
             onPressed: () {
-              // ask for confirmation using showDialog
-              // showDialog(context: context, builder: builder)
               _showLogoutConfirmationDialog(context);
-              // context.read<AuthBloc>().add(AuthLogout());
             },
             icon: const Icon(Icons.logout),
           ),
@@ -57,7 +54,7 @@ class _AdminHomeState extends State<AdminHome> {
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
-              DrawerHeader(
+              const DrawerHeader(
                 decoration: BoxDecoration(
                   color: Colors.deepOrange,
                 ),
@@ -71,43 +68,38 @@ class _AdminHomeState extends State<AdminHome> {
                   ),
                 ),
               ),
-
               ListTile(
-                title: Text('Dashbord',
+                title: const Text('Dashbord',
                     style: TextStyle(fontWeight: FontWeight.bold)),
                 selected: _selectedIndex == 0,
                 onTap: () {
-                  // Update the state of the app
                   _onItemTapped(0);
-                  // Then close the drawer
+
                   Navigator.pop(context);
                 },
               ),
               ListTile(
-                title: Text(
+                title: const Text(
                   'Add Food',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 selected: _selectedIndex == 1,
                 onTap: () {
-                  // Update the state of the app
                   _onItemTapped(1);
-                  // Then close the drawer
+
                   Navigator.pop(context);
                 },
               ),
               ListTile(
-                title: Text('Order List',
+                title: const Text('Order List',
                     style: TextStyle(fontWeight: FontWeight.bold)),
                 selected: _selectedIndex == 2,
                 onTap: () {
-                  // Update the state of the app
                   _onItemTapped(2);
-                  // Then close the drawer
+
                   Navigator.pop(context);
                 },
               ),
-              // Add more list items for other navigable components
             ],
           ),
         ),
@@ -122,18 +114,18 @@ void _showLogoutConfirmationDialog(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text("Logout Confirmation"),
-        content: Text("Are you sure you want to logout?"),
+        title: const Text("Logout Confirmation"),
+        content: const Text("Are you sure you want to logout?"),
         actions: <Widget>[
           TextButton(
-            child: Text("Logout"),
+            child: const Text("Logout"),
             onPressed: () {
               GoRouter.of(context).go('/login');
               context.read<AuthBloc>().add(AuthLogout());
             },
           ),
           TextButton(
-            child: Text("Cancel"),
+            child: const Text("Cancel"),
             onPressed: () {
               Navigator.of(context).pop();
             },
