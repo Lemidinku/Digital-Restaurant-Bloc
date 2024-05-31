@@ -137,8 +137,6 @@ class _UpdateFoodPageState extends State<UpdateFoodPage> {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
-
-                    // Collect form data
                     final updates = {
                       'name': _foodNameController.text,
                       'description': _descriptionController.text,
