@@ -7,8 +7,7 @@ import 'package:restaurant/Infrastructure/repositories/meal_repository.dart'; //
 import 'package:mockito/annotations.dart'; // Import mockito annotations
 
 // Import the generated mock class
-import 'cart_bloc_test.mocks.dart';
-// import 'meal_bloc_test.mocks.dart';
+import 'meal_bloc_test.mocks.dart';
 
 @GenerateMocks([MealRepository]) // Generate mock class for MealRepository
 void main() {

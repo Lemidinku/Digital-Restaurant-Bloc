@@ -24,7 +24,7 @@ void main() {
     });
 
     test('initial state is CartInitial', () {
-      expect(cartBloc.state, equals(CartInitial()));
+      expect(cartBloc.state, isA<CartInitial>());
     });
 
     // Create mock meals
