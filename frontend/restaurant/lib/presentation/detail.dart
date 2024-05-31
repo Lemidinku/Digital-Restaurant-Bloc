@@ -27,7 +27,8 @@ class FoodDetailPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           title,
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          style:
+              const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: const Color(0xFFF97350),
       ),
@@ -46,7 +47,7 @@ class FoodDetailPage extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(16.0)),
+                        const BorderRadius.vertical(top: Radius.circular(16.0)),
                     child: Image.asset(
                       imagePath,
                       fit: BoxFit.cover,
@@ -61,29 +62,29 @@ class FoodDetailPage extends StatelessWidget {
                       children: [
                         Text(
                           title,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: 8.0),
+                        const SizedBox(height: 8.0),
                         Text(
                           'Kind: $kind',
-                          style: TextStyle(fontSize: 16.0),
+                          style: const TextStyle(fontSize: 16.0),
                         ),
                         Text(
                           'Type: $type',
-                          style: TextStyle(fontSize: 16.0),
+                          style: const TextStyle(fontSize: 16.0),
                         ),
                         Text(
                           'Origin: $origin',
-                          style: TextStyle(fontSize: 16.0),
+                          style: const TextStyle(fontSize: 16.0),
                         ),
                         Text(
                           'Price: $price',
-                          style: TextStyle(fontSize: 16.0),
+                          style: const TextStyle(fontSize: 16.0),
                         ),
-                        SizedBox(height: 16.0),
+                        const SizedBox(height: 16.0),
                         RatingBar.builder(
                           initialRating: double.parse(rating),
                           minRating: 1,
@@ -91,13 +92,11 @@ class FoodDetailPage extends StatelessWidget {
                           allowHalfRating: true,
                           itemCount: 5,
                           itemSize: 30.0,
-                          itemBuilder: (context, _) => Icon(
+                          itemBuilder: (context, _) => const Icon(
                             Icons.star,
                             color: Colors.amber,
                           ),
-                          onRatingUpdate: (rating) {
-                            // Implement logic to update the rating
-                          },
+                          onRatingUpdate: (rating) {},
                         ),
                       ],
                     ),

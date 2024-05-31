@@ -15,7 +15,6 @@ class BottomNav extends StatefulWidget {
 }
 
 class _BottomNavState extends State<BottomNav> {
-  //Create variable for selected index on the bottom nav bar
   int selected_idx = 0;
 
   void _navigateBottomBar(int index) {
@@ -46,10 +45,7 @@ class _BottomNavState extends State<BottomNav> {
           actions: [
             IconButton(
               onPressed: () {
-                // ask for confirmation using showDialog
-                // showDialog(context: context, builder: builder)
                 _showLogoutConfirmationDialog(context);
-                // context.read<AuthBloc>().add(AuthLogout());
               },
               icon: const Icon(Icons.logout),
             ),
@@ -87,18 +83,18 @@ void _showLogoutConfirmationDialog(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text("Logout Confirmation"),
-        content: Text("Are you sure you want to logout?"),
+        title: const Text("Logout Confirmation"),
+        content: const Text("Are you sure you want to logout?"),
         actions: <Widget>[
           TextButton(
-            child: Text("Logout"),
+            child: const Text("Logout"),
             onPressed: () {
               GoRouter.of(context).go('/login');
               context.read<AuthBloc>().add(AuthLogout());
             },
           ),
           TextButton(
-            child: Text("Cancel"),
+            child: const Text("Cancel"),
             onPressed: () {
               Navigator.of(context).pop();
             },
