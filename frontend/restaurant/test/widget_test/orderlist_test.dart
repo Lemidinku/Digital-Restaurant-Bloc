@@ -5,7 +5,7 @@ import 'package:restaurant/presentation/admin/orderlist.dart';
 void main() {
   testWidgets('OrderList renders correctly', (WidgetTester tester) async {
     // Build the OrderList widget.
-    await tester.pumpWidget(const OrderList());
+    await tester.pumpWidget(const OrdersListPage());
 
     // Verify the app bar title.
     expect(find.text('Orders'), findsOneWidget);
@@ -14,7 +14,7 @@ void main() {
   testWidgets('OrderList displays the list of orders',
       (WidgetTester tester) async {
     // Build the OrderList widget.
-    await tester.pumpWidget(const OrderList());
+    await tester.pumpWidget(const OrdersListPage());
 
     // Verify the number of OrderCard widgets.
 
@@ -29,7 +29,7 @@ void main() {
   testWidgets('OrderCard completion button toggles state',
       (WidgetTester tester) async {
     // Build the OrderList widget.
-    await tester.pumpWidget(const OrderList());
+    await tester.pumpWidget(const OrdersListPage());
 
     // Verify initial state of the first order's completion button.
     var firstOrderCompleteButton = find.descendant(

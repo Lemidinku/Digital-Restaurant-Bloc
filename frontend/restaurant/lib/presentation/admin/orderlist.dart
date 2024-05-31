@@ -4,22 +4,31 @@ import 'package:restaurant/application/cart/cart_bloc.dart';
 import 'package:restaurant/application/order/order_bloc.dart';
 import 'package:restaurant/domain/order.dart';
 
-class OrderList extends StatelessWidget {
-  const OrderList({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Project ',
-      theme: ThemeData(primarySwatch: Colors.deepOrange),
-      home: Orders(),
-    );
-  }
+void main() {
+  runApp(const OrdersListPage());
 }
 
-class Orders extends StatelessWidget {
-  const Orders({Key? key}) : super(key: key);
+// class OrderList extends StatelessWidget {
+//   const OrderList({Key? key}) : super(key: key);
 
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: 'Project',
+//       theme: ThemeData(primarySwatch: Colors.deepOrange),
+//       home: OrdersListPage(),
+//     );
+//   }
+// }
+
+class OrdersListPage extends StatefulWidget {
+  const OrdersListPage({Key? key}) : super(key: key);
+
+  @override
+  State<OrdersListPage> createState() => _OrdersListPageState();
+}
+
+class _OrdersListPageState extends State<OrdersListPage> {
   @override
   Widget build(BuildContext context) {
     // Sample list of orders
@@ -35,7 +44,7 @@ class Orders extends StatelessWidget {
             return Scaffold(
               appBar: AppBar(
                 title: Text(
-                  'Orders',
+                  'OrdersListPage',
                   style: TextStyle(
                       fontSize: 30.0,
                       fontWeight: FontWeight.bold,

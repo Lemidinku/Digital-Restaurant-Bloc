@@ -51,7 +51,8 @@ class MyApp extends StatelessWidget {
               MealBloc(mealRepository: mealRepository)..add(LoadMeals()),
         ),
         BlocProvider(
-            create: (context) => OrderBloc(orderRepository: orderRepository)),
+            create: (context) =>
+                OrderBloc(orderRepository: orderRepository)..add(LoadOrders())),
         BlocProvider(create: (context) => CartBloc()),
       ],
       child: MaterialApp(

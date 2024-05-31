@@ -22,6 +22,7 @@ class OrderTail extends StatefulWidget {
 
 class _OrderTailState extends State<OrderTail> {
   int _quantity = 0;
+  bool isSelected = false;
 
   void _increment() {
     setState(() {
@@ -34,6 +35,12 @@ class _OrderTailState extends State<OrderTail> {
       if (_quantity > 0) {
         _quantity--;
       }
+    });
+  }
+
+  void _toggleSelection() {
+    setState(() {
+      isSelected = !isSelected;
     });
   }
 
@@ -123,23 +130,26 @@ class _OrderTailState extends State<OrderTail> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0),
                   child: ElevatedButton(
-                    onPressed: () {
-                      // MealBloc.add(
-                      //     OrderSelectedButtonEvent(clickedMeals: orders));
-                      context.read<MealBloc>().add(OrderSelectedButtonEvent(
-                          clickedMeals: widget.orders, quantity: _quantity));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFF97350),
-                      foregroundColor: Colors.white,
-                      elevation: 0,
-                      minimumSize: const Size(221, 37),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
+                      onPressed: () {
+                        // MealBloc.add(
+                        //     OrderSelectedButtonEvent(clickedMeals: orders));
+                        _toggleSelection();
+
+                        context.read<MealBloc>().add(OrderSelectedButtonEvent(
+                            clickedMeals: widget.orders, quantity: _quantity));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            isSelected ? Colors.white : const Color(0xFFF97350),
+                        foregroundColor:
+                            isSelected ? Colors.deepOrange : Colors.white,
+                        elevation: 0,
+                        minimumSize: const Size(221, 37),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
                       ),
-                    ),
-                    child: const Text('Select Order'),
-                  ),
+                      child: Text(isSelected ? 'Selected' : 'Select Order')),
                 ),
               ],
             ),
