@@ -1,3 +1,6 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:restaurant/application/auth/auth_bloc.dart';
 import 'package:restaurant/presentation/admin/addfood.dart';
 
 import 'package:restaurant/presentation/admin/component/dashbordhome.dart';
@@ -34,13 +37,20 @@ class _AdminHomeState extends State<AdminHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text(
-        widget.title,
-        style: TextStyle(
-            fontSize: 30.0,
-            fontWeight: FontWeight.bold,
-            fontFamily: AutofillHints.language),
-      )),
+        title: const Text('Admin page'),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              // ask for confirmation using showDialog
+              // showDialog(context: context, builder: builder)
+              _showLogoutConfirmationDialog(context);
+              // context.read<AuthBloc>().add(AuthLogout());
+            },
+            icon: const Icon(Icons.logout),
+          ),
+        ],
+      ),
       drawer: Drawer(
         child: Padding(
           padding: const EdgeInsets.all(0.0),
@@ -105,4 +115,31 @@ class _AdminHomeState extends State<AdminHome> {
       body: _widgetOptions[_selectedIndex],
     );
   }
+}
+
+void _showLogoutConfirmationDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Logout Confirmation"),
+        content: Text("Are you sure you want to logout?"),
+        actions: <Widget>[
+          TextButton(
+            child: Text("Logout"),
+            onPressed: () {
+              GoRouter.of(context).go('/login');
+              context.read<AuthBloc>().add(AuthLogout());
+            },
+          ),
+          TextButton(
+            child: Text("Cancel"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }
